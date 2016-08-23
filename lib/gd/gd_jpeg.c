@@ -765,7 +765,7 @@ fill_input_buffer (j_decompress_ptr cinfo)
  */
 
 void
-skip_input_data (j_decompress_ptr cinfo, long num_bytes)
+skip_input_data (j_decompress_ptr cinfo, int64_t num_bytes)
 {
   my_src_ptr src = (my_src_ptr) cinfo->src;
 

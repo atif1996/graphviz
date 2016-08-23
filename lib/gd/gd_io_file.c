@@ -47,7 +47,7 @@ static void filePutchar (gdIOCtx *, int);
 static int fileGetchar (gdIOCtx * ctx);
 
 static int fileSeek (struct gdIOCtx *, const int);
-static long fileTell (struct gdIOCtx *);
+static int64_t fileTell (struct gdIOCtx *);
 static void gdFreeFileCtx (gdIOCtx * ctx);
 
 /* return data as a dynamic pointer */

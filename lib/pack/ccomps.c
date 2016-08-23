@@ -576,7 +576,7 @@ subGInduce(Agraph_t* g, Agraph_t * out)
 Agraph_t **cccomps(Agraph_t * g, int *ncc, char *pfx)
 {
     Agraph_t *dg;
-    long n_cnt, c_cnt, e_cnt;
+    int64_t n_cnt, c_cnt, e_cnt;
     char *name;
     Agraph_t *out;
     Agraph_t *dout;

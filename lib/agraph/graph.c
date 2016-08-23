@@ -46,7 +46,7 @@ Agraph_t *agopen(char *name, Agdesc_t desc, Agdisc_t * arg_disc)
 {
     Agraph_t *g;
     Agclos_t *clos;
-    unsigned long gid;
+    uint64_t gid;
 
     clos = agclos(arg_disc);
     g = clos->disc.mem->alloc(clos->state.mem, sizeof(Agraph_t));
@@ -155,7 +155,7 @@ int agclose(Agraph_t * g)
     return SUCCESS;
 }
 
-unsigned long agnextseq(Agraph_t * g, int objtype)
+uint64_t agnextseq(Agraph_t * g, int objtype)
 {
     return ++(g->clos->seq[objtype]);
 }

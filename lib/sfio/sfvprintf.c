@@ -379,7 +379,7 @@ va_list args;			/* arg list if !argf    */
 	if (flags & (SFFMT_TYPES & ~SFFMT_IFLAG)) {
 	    if ((_Sftype[fmt] & (SFFMT_INT | SFFMT_UINT)) || fmt == 'n') {
 		size = (flags & SFFMT_LLONG) ? sizeof(Sflong_t) :
-		    (flags & SFFMT_LONG) ? sizeof(long) :
+		    (flags & SFFMT_LONG) ? sizeof(int64_t) :
 		    (flags & SFFMT_SHORT) ? sizeof(short) :
 		    (flags & SFFMT_SSHORT) ? sizeof(char) :
 		    (flags & SFFMT_JFLAG) ? sizeof(Sflong_t) :
@@ -577,7 +577,7 @@ va_list args;			/* arg list if !argf    */
 	    else
 #endif
 	    if (FMTCMP(size, long, Sflong_t))
-		*((long *) argv.vp) = (long) n_output;
+		*((int64_t *) argv.vp) = (int64_t) n_output;
 	    else if (sizeof(short) < sizeof(int) &&
 		     FMTCMP(size, short, Sflong_t))
 		*((short *) argv.vp) = (short) n_output;

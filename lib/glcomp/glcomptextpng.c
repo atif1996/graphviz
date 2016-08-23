@@ -56,7 +56,7 @@ unsigned char *load_png2(char *file_name, int *imageWidth,
     unsigned char *imageData = NULL;
     unsigned char header[8];
     int i, ii, b0, b1, b2, b3, pixeloffset;
-    long int c;
+    int64_t c;
     png_structp png_ptr;
     png_infop info_ptr;
     png_infop end_info;

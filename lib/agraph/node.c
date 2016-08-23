@@ -14,7 +14,7 @@
 
 #include "aghdr.h"
 
-Agnode_t *agfindnode_by_id(Agraph_t * g, unsigned long id)
+Agnode_t *agfindnode_by_id(Agraph_t * g, uint64_t id)
 {
     Agnode_t *n;
     static Agnode_t template;
@@ -26,7 +26,7 @@ Agnode_t *agfindnode_by_id(Agraph_t * g, unsigned long id)
 
 Agnode_t *agfindnode_by_name(Agraph_t * g, char *name)
 {
-    unsigned long id;
+    uint64_t id;
 
     if (agmapnametoid(g, AGNODE, name, &id, FALSE))
 	return agfindnode_by_id(g, id);
@@ -50,7 +50,7 @@ Agnode_t *agnxtnode(Agnode_t * n)
     }
 }
 
-static Agnode_t *newnode(Agraph_t * g, unsigned long id, unsigned long seq)
+static Agnode_t *newnode(Agraph_t * g, uint64_t id, uint64_t seq)
 {
     Agnode_t *n;
 
@@ -65,7 +65,7 @@ static Agnode_t *newnode(Agraph_t * g, unsigned long id, unsigned long seq)
 }
 
 /* create or bind the given node.  it may already exist in the parent. */
-static Agnode_t *mklocalnode(Agraph_t * g, unsigned long id,
+static Agnode_t *mklocalnode(Agraph_t * g, uint64_t id,
 			     Agnode_t * rootnode, int *isnew)
 {
     Agnode_t *n, *npar;
@@ -96,7 +96,7 @@ static Agnode_t *mklocalnode(Agraph_t * g, unsigned long id,
     return n;
 }
 
-static Agnode_t *localnode(Agraph_t * g, unsigned long id,
+static Agnode_t *localnode(Agraph_t * g, uint64_t id,
 			   Agnode_t * rootnode)
 {
     int isnew = FALSE;
@@ -110,7 +110,7 @@ static Agnode_t *localnode(Agraph_t * g, unsigned long id,
     return n;
 }
 
-Agnode_t *agidnode(Agraph_t * g, unsigned long id, int cflag)
+Agnode_t *agidnode(Agraph_t * g, uint64_t id, int cflag)
 {
     Agraph_t *root;
     Agnode_t *n, *rootnode;
@@ -130,7 +130,7 @@ Agnode_t *agnode(Agraph_t * g, char *name, int cflag)
 {
     Agraph_t *root;
     Agnode_t *n, *rootnode;
-    unsigned long id;
+    uint64_t id;
 
     if (agmapnametoid(g, AGNODE, name, &id, FALSE)) {
 	/* might already exist locally */
@@ -220,10 +220,10 @@ int agdelnode(Agnode_t * n)
 static void dict_relabel(Agnode_t * n, void *arg)
 {
     Agraph_t *g;
-    unsigned long new_id;
+    uint64_t new_id;
 
     g = agraphof(n);
-    new_id = *(unsigned long *) arg;
+    new_id = *(uint64_t *) arg;
     agnotflat(g);
     dtdelete(g->n_id, n);
     AGID(n) = new_id;
@@ -233,7 +233,7 @@ static void dict_relabel(Agnode_t * n, void *arg)
 int agrelabel_node(Agnode_t * n, char *newname)
 {
     Agraph_t *g;
-    unsigned long new_id;
+    uint64_t new_id;
 
     g = agroot(agraphof(n));
     if (agfindnode_by_name(g, newname))

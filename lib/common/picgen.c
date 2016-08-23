@@ -467,7 +467,7 @@ static void pic_set_style(char **s)
 	p++;
 	while (*p) {
 	    if (!strcmp(line, "setlinewidth")) {	/* a hack to handle the user-defined (PS) style spec in proc3d.dot */
-		long n = atol(p);
+		int64_t n = atol(p);
 
 		sprintf(buf,
 			"oldlinethick = linethick;linethick = %ld * scalethickness / %.0f\n",

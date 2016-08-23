@@ -98,7 +98,7 @@ extern "C" {
     extern int strmatch(const char *, const char *);
     extern int strgrpmatch(const char *, const char *, int *, int, int);
     extern int stresc(char *);
-    extern long strton(const char *, char **, char *, int);
+    extern int64_t strton(const char *, char **, char *, int);
     extern char *strcopy(char *s, const char *t);
 
 #endif

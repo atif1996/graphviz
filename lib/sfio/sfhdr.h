@@ -550,7 +550,7 @@ extern "C" {
     typedef struct _fmtpos_s Fmtpos_t;
     typedef union {
 	int i, *ip;
-	long l, *lp;
+	int64_t l, *lp;
 	short h, *hp;
 	uint ui;
 	ulong ul;

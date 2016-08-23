@@ -32,7 +32,7 @@ void *buffstderr(void)
  */
 char *unbuffstderr(struct buff_s *b)
 {
-    long sz;
+    int64_t sz;
     char *t = NULL;
     FILE *f;
 

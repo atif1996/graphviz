@@ -72,7 +72,7 @@ extern double drand48(void);
 typedef struct {
     int useGrid;	/* use grid for speed up */
     int useNew;		/* encode x-K into attractive force */
-    long seed;		/* seed for position RNG */
+    int64_t seed;		/* seed for position RNG */
     int numIters;	/* actual iterations in layout */
     int maxIters;	/* max iterations in layout */
     int unscaled;	/* % of iterations used in pass 1 */
@@ -474,7 +474,7 @@ static pointf initPositions(graph_t * g, bport_t * pp)
     int n_pos = 0;		/* no. of nodes with position info */
     box bb = { {0, 0}, {0, 0} };
     pointf ctr;			/* center of boundary ellipse */
-    long local_seed;
+    int64_t local_seed;
     double PItimes2 = M_PI * 2.0;
 
     for (np = agfstnode(g); np; np = agnxtnode(g, np)) {

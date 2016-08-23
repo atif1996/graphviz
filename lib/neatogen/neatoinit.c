@@ -976,7 +976,7 @@ setSeed (graph_t * G, int dflt, long* seedp)
     }
     
     if (init == INIT_RANDOM) {
-	long seed;
+	int64_t seed;
 	/* Check for seed value */
 	if (!isdigit(*(unsigned char *)p) || sscanf(p, "%ld", &seed) < 1) {
 #if defined(MSWIN32) || defined(WIN32)
@@ -1020,7 +1020,7 @@ static int checkExp (graph_t * G)
  */
 int checkStart(graph_t * G, int nG, int dflt)
 {
-    long seed;
+    int64_t seed;
     int init;
 
     seed = 1;
@@ -1281,7 +1281,7 @@ static void subset_model(Agraph_t * G, int nG)
  */
 static void mds_model(graph_t * g, int nG)
 {
-    long i, j;
+    int64_t i, j;
     node_t *v;
     edge_t *e;
 

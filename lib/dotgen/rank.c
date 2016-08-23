@@ -448,7 +448,7 @@ setRanks (graph_t* g, attrsym_t* lsym)
     node_t* n;
     char*   s;
     char*   ep;
-    long    v;
+    int64_t    v;
 
     for (n = agfstnode(g); n; n = agnxtnode(g,n)) {
 	s = agxget (n, lsym->index);

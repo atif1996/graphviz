@@ -15,10 +15,11 @@
 extern "C" {
 #endif
 
+#include <stdint.h>
 /* : : generated from features/align.c by iffe version 1999-08-11 : : */
 #ifndef _def_align_ast
 #define _def_align_ast	1
-    typedef unsigned long ALIGN_INTEGRAL;
+    typedef uint64_t ALIGN_INTEGRAL;
 
 #define ALIGN_CHUNK		8192
 #define ALIGN_INTEGRAL		long

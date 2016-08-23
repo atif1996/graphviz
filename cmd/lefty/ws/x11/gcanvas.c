@@ -1220,7 +1220,7 @@ static int scalebitmap (
     XColor colors[G_MAXCOLORS + 1];
     int cmaxdiff, colorn, colori, x, y, x2, y2, xp, yp;
     double prod, rgb[3], xr2, yr2, xl2, yl2, xf2, yf2, xr, yr, xl, yl;
-    unsigned long pixel;
+    uint64_t pixel;
 
     if (!copybits) {
         if (dir == 1) {

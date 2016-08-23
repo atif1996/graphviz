@@ -119,17 +119,17 @@ extern "C" {
     void agstrclose(Agraph_t * g);
 
     /* object set management */
-    Agnode_t *agfindnode_by_id(Agraph_t * g, unsigned long id);
+    Agnode_t *agfindnode_by_id(Agraph_t * g, uint64_t id);
     Dtcompar_f agdictorder(Agraph_t *, Dict_t *, Dtcompar_f);
     int agobjidcmpf(Dict_t * d, void *, void *, Dtdisc_t * disc);
     int agnamecmpf(Dict_t * d, void *, void *, Dtdisc_t * disc);
     void agset_node_disc(Agraph_t * g, Dtdisc_t * disc);
-    unsigned long agnextseq(Agraph_t * g, int objtype);
+    uint64_t agnextseq(Agraph_t * g, int objtype);
 
 /* dict helper functions */
     Dict_t *agdtopen(Agraph_t * g, Dtdisc_t * disc, Dtmethod_t * method);
     void agdtdisc(Agraph_t * g, Dict_t * dict, Dtdisc_t * disc);
-    long agdtdelete(Agraph_t * g, Dict_t * dict, void *obj);
+    int64_t agdtdelete(Agraph_t * g, Dict_t * dict, void *obj);
     void agdtclose(Agraph_t * g, Dict_t * dict);
     void *agdictobjmem(Dict_t * dict, Void_t * p, size_t size,
 		       Dtdisc_t * disc);
@@ -157,23 +157,23 @@ extern "C" {
 
     /* ID management */
     int agmapnametoid(Agraph_t * g, int objtype, char *str,
-		      unsigned long *result, int allocflag);
-    int agallocid(Agraph_t * g, int objtype, unsigned long request);
-    void agfreeid(Agraph_t * g, int objtype, unsigned long id);
+		      uint64_t *result, int allocflag);
+    int agallocid(Agraph_t * g, int objtype, uint64_t request);
+    void agfreeid(Agraph_t * g, int objtype, uint64_t id);
     char *agprintid(Agobj_t * obj);
     int aginternalmaplookup(Agraph_t * g, int objtype, char *str,
-			    unsigned long *result);
+			    uint64_t *result);
     void aginternalmapinsert(Agraph_t * g, int objtype, char *str,
-			     unsigned long result);
-    char *aginternalmapprint(Agraph_t * g, int objtype, unsigned long id);
-    int aginternalmapdelete(Agraph_t * g, int objtype, unsigned long id);
+			     uint64_t result);
+    char *aginternalmapprint(Agraph_t * g, int objtype, uint64_t id);
+    int aginternalmapdelete(Agraph_t * g, int objtype, uint64_t id);
     void aginternalmapclose(Agraph_t * g);
 
     /* internal set operations */
     void agedgesetop(Agraph_t * g, Agedge_t * e, int insertion);
     void agdelnodeimage(Agnode_t * node, void *ignored);
 
-    long agdelsubg(Agraph_t * g, Agraph_t * sub);
+    int64_t agdelsubg(Agraph_t * g, Agraph_t * sub);
     int agdelnode(Agnode_t * arg_n);
     int agdeledge(Agedge_t * arg_e);
     int agrename(Agobj_t * obj, char *newname);

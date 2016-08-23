@@ -80,7 +80,7 @@ for a given node or edges, there is only one unique ID (per main graph).  */
 	unsigned mtflock:1;	/* move-to-front lock, see above */
 	unsigned attrwf:1;	/* non-default attrs written */
 	unsigned seq:(sizeof(unsigned) * 8 - 6);	/* sequence no. */
-	unsigned long id;	/* client  ID */
+	uint64_t id;	/* client  ID */
     };
 
     /* object tags */
@@ -149,11 +149,11 @@ for the name. */
 
     struct Agiddisc_s {		/* object ID allocator */
 	void *(*open) (Agraph_t * g);	/* associated with a graph */
-	long (*map) (void *state, int objtype, char *str,
-		     unsigned long *id, int createflag);
-	long (*alloc) (void *state, int objtype, unsigned long id);
-	void (*free) (void *state, int objtype, unsigned long id);
-	char *(*print) (void *state, int objtype, unsigned long id);
+	int64_t (*map) (void *state, int objtype, char *str,
+		     uint64_t *id, int createflag);
+	int64_t (*alloc) (void *state, int objtype, uint64_t id);
+	void (*free) (void *state, int objtype, uint64_t id);
+	char *(*print) (void *state, int objtype, uint64_t id);
 	void (*close) (void *state);
     };
 
@@ -210,7 +210,7 @@ for the name. */
 	Agdisc_t disc;		/* resource discipline functions */
 	Agdstate_t state;	/* resource closures */
 	Dict_t *strdict;	/* shared string dict */
-	unsigned long seq[3];	/* local object sequence number counter */
+	uint64_t seq[3];	/* local object sequence number counter */
 	Agcbstack_t *cb;	/* user and system callback function stacks */
 	unsigned char callbacks_enabled;	/* issue user callbacks or hold them? */
 	Dict_t *lookup_by_name[3];
@@ -260,7 +260,7 @@ for the name. */
 
 /* nodes */
     extern Agnode_t *agnode(Agraph_t * g, char *name, int createflag);
-    extern Agnode_t *agidnode(Agraph_t * g, unsigned long id,
+    extern Agnode_t *agidnode(Agraph_t * g, uint64_t id,
 			      int createflag);
     extern Agnode_t *agsubnode(Agraph_t * g, Agnode_t * n, int createflag);
     extern Agnode_t *agfstnode(Agraph_t * g);
@@ -269,7 +269,7 @@ for the name. */
 /* edges */
     extern Agedge_t *agedge(Agnode_t * t, Agnode_t * h, char *name,
 			    int createflag);
-    extern Agedge_t *agidedge(Agnode_t * t, Agnode_t * h, unsigned long id,
+    extern Agedge_t *agidedge(Agnode_t * t, Agnode_t * h, uint64_t id,
 			      int createflag);
     extern Agedge_t *agsubedge(Agraph_t * g, Agedge_t * e, int createflag);
     extern Agedge_t *agfstin(Agnode_t * n);
@@ -285,7 +285,7 @@ for the name. */
     extern int agrelabel(void *obj, char *name);	/* scary */
     extern int agrelabel_node(Agnode_t * n, char *newname);
     extern int agdelete(Agraph_t * g, void *obj);
-    extern long agdelsubg(Agraph_t * g, Agraph_t * sub);	/* could be agclose */
+    extern int64_t agdelsubg(Agraph_t * g, Agraph_t * sub);	/* could be agclose */
     extern int agdelnode(Agnode_t * arg_n);
     extern int agdeledge(Agedge_t * arg_e);
     extern int agisarootobj(void *);
@@ -341,7 +341,7 @@ for the name. */
 
 /* defintions for subgraphs */
     extern Agraph_t *agsubg(Agraph_t * g, char *name, int cflag);	/* constructor */
-    extern Agraph_t *agidsubg(Agraph_t * g, unsigned long id, int cflag);	/* constructor */
+    extern Agraph_t *agidsubg(Agraph_t * g, uint64_t id, int cflag);	/* constructor */
     extern Agraph_t *agfstsubg(Agraph_t * g), *agnxtsubg(Agraph_t * subg);
     extern Agraph_t *agparent(Agraph_t * g), *agroot(Agraph_t * g);
 

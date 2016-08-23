@@ -29,7 +29,7 @@
 #define max(a, b) (((a) >= (b)) ? (a) : (b))
 #define min(a, b) (((a) <= (b)) ? (a) : (b))
 
-static long gstyles[5] = {
+static int64_t gstyles[5] = {
     /* G_SOLID */       PS_SOLID,
     /* G_DASHED */      PS_DASH,
     /* G_DOTTED */      PS_DOT,
@@ -1195,7 +1195,7 @@ static void setgattr (Gwidget_t *widget, Ggattr_t *ap) {
     HBRUSH brush, pbrush;
     HPEN pen, ppen;
     PALETTEENTRY *colorp;
-    long color, mode, style, width, flag, pati;
+    int64_t color, mode, style, width, flag, pati;
     double intens;
 
     if (!(ap->flags & G_GATTRCOLOR))

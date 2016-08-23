@@ -62,7 +62,7 @@ typedef struct gfxrect_t {
 typedef struct gfxmenu_t {
     struct gfxmenu_t *next;
     Tobj ko;
-    long time;
+    int64_t time;
     int mi;
 } gfxmenu_t;
 #define LISTSIZE 100
@@ -91,7 +91,7 @@ static int gfxnoden;
 #define ISABITMAP(bi) (bi >= 0 && bi < Gbitmapn && Gbitmaps[bi].inuse)
 
 static Gpoint_t *gpp = NULL;
-static long gpn = 0;
+static int64_t gpn = 0;
 #define GPINCR 100
 #define GPSIZE sizeof (Gpoint_t)
 
@@ -191,7 +191,7 @@ void GFXlabelcb (Gevent_t *evp) {
     Tobj fo, to, co, wo;
     char *fn;
     char s[2];
-    long fm;
+    int64_t fm;
 
     fn = NULL;
     wo = Tfindi (rootwo, evp->wi);
@@ -231,7 +231,7 @@ void GFXlabelcb (Gevent_t *evp) {
 void GFXviewcb (Gevent_t *evp) {
     Tobj fo, to, co, wo;
     char *fn;
-    long fm;
+    int64_t fm;
 
     wo = Tfindi (rootwo, evp->wi);
     fn = "closeview";
@@ -254,7 +254,7 @@ void GFXevent (Gevent_t *evp) {
     Gpoint_t pp;
     char *fn;
     char s[2];
-    long fm;
+    int64_t fm;
     int ni;
 
     pp.x = pp.y = 0;
@@ -351,7 +351,7 @@ void GFXmove (void) {
     char *fn[5];
     Tobj vo[5], fo, to, po, co, wo;
     Gpoint_t cp, pp[5];
-    long fm;
+    int64_t fm;
     int count, i, ni;
 
     for (ni = 0; ni < gfxnoden; ni++) {
@@ -416,7 +416,7 @@ void GFXmove (void) {
 void GFXredraw (void) {
     gfxnode_t *np;
     Tobj wo, fo, co, to;
-    long fm;
+    int64_t fm;
     int ni;
 
     for (ni = 0; ni < gfxnoden; ni++) {
@@ -444,7 +444,7 @@ void GFXredraw (void) {
 
 void GFXtextcb (int wi, char *s) {
     Tobj wo, fo, co, to;
-    long fm;
+    int64_t fm;
 
     if (!(wo = Tfindi (rootwo, wi)))
         return;
@@ -464,7 +464,7 @@ void GFXtextcb (int wi, char *s) {
 
 void GFXbuttoncb (int wi, void *data) {
     Tobj wo, fo, co, to;
-    long fm;
+    int64_t fm;
 
     if (!(wo = Tfindi (rootwo, wi)))
         return;
@@ -486,7 +486,7 @@ void GFXarrayresizecb (int wi, Gawdata_t *dp) {
     Tkvindex_t tkvi;
     Gawcarray_t *cp;
     int sx, sy, csx, csy, ci;
-    long fm;
+    int64_t fm;
 
     if (!(wo = Tfindi (rootwo, wi)))
         return;
@@ -550,7 +550,7 @@ void GFXarrayresizecb (int wi, Gawdata_t *dp) {
 /* callback for when there is input on some file descriptor */
 void GFXmonitorfile (int fd) {
     Tobj fo, to, co;
-    long fm, tm;
+    int64_t fm, tm;
 
     if (!(fo = Tfinds (root, "monitorfile")) || Tgettype (fo) != T_CODE)
         return;
@@ -568,7 +568,7 @@ void GFXmonitorfile (int fd) {
 /* callback for when there is no X event and no file input */
 void GFXidle (void) {
     Tobj fo, to, co;
-    long fm, tm;
+    int64_t fm, tm;
 
     if (!(fo = Tfinds (root, "idle")) || Tgettype (fo) != T_CODE)
         return;
@@ -585,7 +585,7 @@ void GFXidle (void) {
 /* LEFTY builtin */
 int GFXcreatewidget (int argc, lvar_t *argv) {
     Tobj pwo, cwo, cho;
-    long rtnm;
+    int64_t rtnm;
     int type, pwi, wi, ni;
 
     type = -1;
@@ -665,7 +665,7 @@ int GFXgetwidgetattr (int argc, lvar_t *argv) {
     Gwattrmap_t *mapp;
     int *ap;
     int li, ai, type, color, wattri2, wi;
-    long rtnm;
+    int64_t rtnm;
 
     wattri = 0;
     if (
@@ -823,7 +823,7 @@ int GFXsetgfxattr (int argc, lvar_t *argv) {
 int GFXgetgfxattr (int argc, lvar_t *argv) {
     Tkvindex_t tkvi;
     Ggattr_t gattr;
-    long rtnm;
+    int64_t rtnm;
     int wi;
     char *s;
 
@@ -932,7 +932,7 @@ int GFXbox (int argc, lvar_t *argv) {
 int GFXpolygon (int argc, lvar_t *argv) {
     Tobj po;
     Ggattr_t gattr;
-    long i, pn;
+    int64_t i, pn;
     int wi;
 
     if (
@@ -956,7 +956,7 @@ int GFXpolygon (int argc, lvar_t *argv) {
 int GFXsplinegon (int argc, lvar_t *argv) {
     Tobj po;
     Ggattr_t gattr;
-    long i, pn;
+    int64_t i, pn;
     int wi;
 
     if (
@@ -1024,7 +1024,7 @@ int GFXtextsize (int argc, lvar_t *argv) {
     Gsize_t sp;
     double fs;
     char *s, *fn;
-    long m;
+    int64_t m;
     int wi;
 
     if (
@@ -1045,7 +1045,7 @@ int GFXtextsize (int argc, lvar_t *argv) {
 int GFXcreatebitmap (int argc, lvar_t *argv) {
     Tobj bo, so;
     Gsize_t s;
-    long rtnm;
+    int64_t rtnm;
     int wi, bi;
 
     if (
@@ -1080,7 +1080,7 @@ int GFXdestroybitmap (int argc, lvar_t *argv) {
 /* LEFTY builtin */
 int GFXreadbitmap (int argc, lvar_t *argv) {
     Tobj bo, so;
-    long rtnm;
+    int64_t rtnm;
     int wi, bi, ioi;
 
     if (
@@ -1219,7 +1219,7 @@ int GFXdisplaymenu (int argc, lvar_t *argv) {
 int GFXcolormap (int argc, lvar_t *argv) {
     char *cs;
     int cni;
-    long rtnm;
+    int64_t rtnm;
 
     if (getstr (argv[0].o, &cs) == -1)
         return L_FAILURE;
@@ -1679,7 +1679,7 @@ static void rectprune (int ni) {
     }
 }
 
-static void menuinsert (int ni, Tobj ko, long time, int mi) {
+static void menuinsert (int ni, Tobj ko, int64_t time, int mi) {
     gfxmenu_t **mp;
     gfxmenu_t *cmp;
 
@@ -1699,7 +1699,7 @@ static void menuinsert (int ni, Tobj ko, long time, int mi) {
     *mp = cmp;
 }
 
-static int menufind (int ni, Tobj ko, long time) {
+static int menufind (int ni, Tobj ko, int64_t time) {
     gfxmenu_t **mp;
     gfxmenu_t *cmp;
 

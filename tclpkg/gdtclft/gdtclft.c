@@ -499,7 +499,7 @@ tclGdCreateCmd(Tcl_Interp * interp, GdData * gdData,
 	       int argc, Tcl_Obj * CONST objv[])
 {
     int w, h;
-    unsigned long idx;
+    uint64_t idx;
     gdImagePtr im = NULL;
     FILE *filePtr;
     ClientData clientdata;
@@ -596,7 +596,7 @@ tclGdDestroyCmd(Tcl_Interp * interp, GdData * gdData, int argc,
 {
     gdImagePtr im;
 
-    unsigned long idx;
+    uint64_t idx;
 
     if (tclhandleIndex(gdData->handleTbl, Tcl_GetString(objv[2]), &idx) != TCL_OK)
 

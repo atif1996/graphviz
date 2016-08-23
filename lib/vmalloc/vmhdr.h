@@ -24,6 +24,8 @@ extern "C" {
 #include <io.h>
 #endif
 
+#include <stdint.h>
+
 /*	Common types, and macros for vmalloc functions.
 **
 **	Written by Kiem-Phong Vo, kpv@research.att.com, 01/16/94.
@@ -59,7 +61,7 @@ extern "C" {
 #undef BITS
 
     typedef unsigned char Vmuchar_t;
-    typedef unsigned long Vmulong_t;
+    typedef uint64_t Vmulong_t;
 
     typedef union _head_u Head_t;
     typedef union _body_u Body_t;
@@ -156,7 +158,7 @@ extern "C" {
 	union _align_u {
 	char c, *cp;
 	int i, *ip;
-	long l, *lp;
+	int64_t l, *lp;
 	double d, *dp, ***dppp[8];
 	size_t s, *sp;
 	void (*fn) (void);
@@ -166,7 +168,7 @@ extern "C" {
 	Block_t *block;
 	Vmuchar_t a[ALIGNB];
 #if _long_double
-	long double ld, *ldp;
+	int64_t double ld, *ldp;
 #endif
     };
     struct _a_s {

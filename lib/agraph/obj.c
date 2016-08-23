@@ -89,7 +89,7 @@ int agdelete(Agraph_t * g, void *obj)
 int agrename(Agobj_t * obj, char *newname)
 {
     Agraph_t *g;
-    unsigned long old_id, new_id;
+    uint64_t old_id, new_id;
 
     switch (AGTYPE(obj)) {
     case AGRAPH:

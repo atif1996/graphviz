@@ -128,7 +128,7 @@ static void tclhandleExpandTable(tblHeader_pt tblHdrPtr, int neededIdx)
  *-----------------------------------------------------------------------------
  */
 entryHeader_pt tclhandleAlloc(tblHeader_pt headerPtr, char *handle,
-			      unsigned long *entryIdxPtr)
+			      uint64_t *entryIdxPtr)
 {
     tblHeader_pt tblHdrPtr = (tblHeader_pt) headerPtr;
     entryHeader_pt entryPtr;
@@ -274,9 +274,9 @@ int tclhandleReset(tblHeader_pt tblHdrPtr, int initEntries)
  *-----------------------------------------------------------------------------
  */
 int tclhandleIndex(tblHeader_pt tblHdrPtr, char *handle,
-		   unsigned long *entryIdxPtr)
+		   uint64_t *entryIdxPtr)
 {
-    unsigned long entryIdx;
+    uint64_t entryIdx;
 
     if ((sscanf(handle, tblHdrPtr->handleFormat, &entryIdx)) != 1)
 	return TCL_ERROR;
@@ -297,7 +297,7 @@ int tclhandleIndex(tblHeader_pt tblHdrPtr, char *handle,
  *-----------------------------------------------------------------------------
  */
 void tclhandleString(tblHeader_pt tblHdrPtr, char *handle,
-		     unsigned long entryIdx)
+		     uint64_t entryIdx)
 {
     sprintf(handle, tblHdrPtr->handleFormat, entryIdx);
 }
@@ -314,7 +314,7 @@ void tclhandleString(tblHeader_pt tblHdrPtr, char *handle,
  *   A pointer to the entry, or NULL if an error occured.
  *-----------------------------------------------------------------------------
  */
-void *tclhandleXlateIndex(tblHeader_pt headerPtr, unsigned long entryIdx)
+void *tclhandleXlateIndex(tblHeader_pt headerPtr, uint64_t entryIdx)
 {
     tblHeader_pt tblHdrPtr = headerPtr;
     entryHeader_pt entryPtr;
@@ -342,7 +342,7 @@ void *tclhandleXlateIndex(tblHeader_pt headerPtr, unsigned long entryIdx)
  */
 void *tclhandleXlate(tblHeader_pt tblHdrPtr, char *handle)
 {
-    unsigned long entryIdx;
+    uint64_t entryIdx;
 
     if ((tclhandleIndex(tblHdrPtr, handle, &entryIdx)) != TCL_OK)
 	return NULL;
@@ -361,7 +361,7 @@ void *tclhandleXlate(tblHeader_pt tblHdrPtr, char *handle)
  *   The contents of the entry, if success, or NULL if an error occured.
  *----------------------------------------------------------------------------
  */
-void *tclhandleFreeIndex(tblHeader_pt headerPtr, unsigned long entryIdx)
+void *tclhandleFreeIndex(tblHeader_pt headerPtr, uint64_t entryIdx)
 {
     tblHeader_pt tblHdrPtr = headerPtr;
     entryHeader_pt entryPtr, freeentryPtr;
@@ -396,7 +396,7 @@ void *tclhandleFreeIndex(tblHeader_pt headerPtr, unsigned long entryIdx)
  */
 void *tclhandleFree(tblHeader_pt tblHdrPtr, char *handle)
 {
-    unsigned long entryIdx;
+    uint64_t entryIdx;
 
     if ((tclhandleIndex(tblHdrPtr, handle, &entryIdx)) != TCL_OK)
 	return NULL;

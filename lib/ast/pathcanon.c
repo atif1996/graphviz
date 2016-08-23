@@ -53,7 +53,7 @@ char *pathcanon(char *path, int flags)
     int loop;
     int oerrno;
 #if defined(FS_3D)
-    long visits = 0;
+    int64_t visits = 0;
 #endif
 
     oerrno = errno;

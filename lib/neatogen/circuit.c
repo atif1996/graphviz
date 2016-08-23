@@ -43,7 +43,7 @@ int circuit_model(graph_t * g, int nG)
     double **Gm;
     double **Gm_inv;
     int rv;
-    long i, j;
+    int64_t i, j;
     node_t *v;
     edge_t *e;
 

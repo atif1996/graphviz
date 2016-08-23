@@ -70,7 +70,7 @@ typedef struct Code_t {
     union {
         char s[1];
         double d;
-        long i;
+        int64_t i;
         int fp;
         void *o;
     } u;

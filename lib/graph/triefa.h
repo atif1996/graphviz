@@ -25,7 +25,7 @@ extern "C" {
 	short def;		/*      If this state is an accepting state then */
 	/*      this is the definition, otherwise -1.   */
 	short trans_base;	/* The base index into the transition table. */
-	long mask;		/* The transition mask.                                         */
+	int64_t mask;		/* The transition mask.                                         */
     };
 
     struct TrieTrans {		/* An entry in the FA transition table.         */

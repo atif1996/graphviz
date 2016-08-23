@@ -48,7 +48,7 @@ static char z_file_header[] =
 static z_stream z_strm;
 static unsigned char *df;
 static unsigned int dfallocated;
-static unsigned long int crc;
+static uint64_t crc;
 #endif /* HAVE_LIBZ */
 
 #include "const.h"
@@ -443,7 +443,7 @@ static char * gvprintnum (size_t *len, double number)
 {
     static char tmpbuf[sizeof(maxnegnumstr)];   /* buffer big enough for worst case */
     char *result = tmpbuf+sizeof(maxnegnumstr); /* init result to end of tmpbuf */
-    long int N;
+    int64_t N;
     boolean showzeros, negative;
     int digit, i;
 

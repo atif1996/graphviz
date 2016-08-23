@@ -483,7 +483,7 @@ void agerror(char *msg)
 
 agerrlevel_t agerrno;		/* Last error */
 static agerrlevel_t agerrlevel = AGWARN;	/* Report errors >= agerrlevel */
-static long aglast;		/* Last message */
+static int64_t aglast;		/* Last message */
 static FILE *agerrout;		/* Message file */
 static agusererrf usererrf;     /* User-set error function */
 
@@ -514,8 +514,8 @@ int agreseterrors(void)
 
 char *aglasterr()
 {
-    long endpos;
-    long len;
+    int64_t endpos;
+    int64_t len;
     char *buf;
 
     if (!agerrout)

@@ -145,7 +145,7 @@ extern "C" {
     typedef int (*Sffmtevent_f)
 	_ARG_((Sfio_t *, int, Void_t *, Sffmt_t *));
     struct _sffmt_s {
-	long version;		/* version of this structure            */
+	int64_t version;		/* version of this structure            */
 	Sffmtext_f extf;	/* function to process arguments        */
 	Sffmtevent_f eventf;	/* process events                       */
 
@@ -349,7 +349,7 @@ extern "C" {
     extern ssize_t sfwr
 	_ARG_((Sfio_t *, const Void_t *, size_t, Sfdisc_t *));
     extern Sfoff_t sfsk _ARG_((Sfio_t *, Sfoff_t, int, Sfdisc_t *));
-    extern ssize_t sfpkrd _ARG_((int, Void_t *, size_t, int, long, int));
+    extern ssize_t sfpkrd _ARG_((int, Void_t *, size_t, int, int64_t, int));
 
 /* portable handling of primitive types */
     extern int sfdlen _ARG_((Sfdouble_t));

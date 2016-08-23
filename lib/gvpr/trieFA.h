@@ -17,7 +17,7 @@ typedef struct {				/* An entry in the FA transition table.		*/
 }TrieTrans ;
 
 #ifdef UNDERLINE
-static long CharMask[28] = {
+static int64_t CharMask[28] = {
 	0x0000001,	0x0000000,	0x0000004,	0x0000008,	
 	0x0000010,	0x0000020,	0x0000040,	0x0000080,
 	0x0000100,	0x0000200,	0x0000400,	0x0000800,
@@ -31,7 +31,7 @@ static long CharMask[28] = {
 #define MASK_INDEX(C)	((C) - '_')
 
 #else
-static long CharMask[26] = {
+static int64_t CharMask[26] = {
 	0x0000001,	0x0000002,	0x0000004,	0x0000008,	
 	0x0000010,	0x0000020,	0x0000040,	0x0000080,
 	0x0000100,	0x0000200,	0x0000400,	0x0000800,

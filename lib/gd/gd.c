@@ -244,17 +244,17 @@ BGD_DECLARE(int) gdImageColorClosest (gdImagePtr im, int r, int g, int b)
 BGD_DECLARE(int) gdImageColorClosestAlpha (gdImagePtr im, int r, int g, int b, int a)
 {
   int i;
-  long rd, gd, bd, ad;
+  int64_t rd, gd, bd, ad;
   int ct = (-1);
   int first = 1;
-  long mindist = 0;
+  int64_t mindist = 0;
   if (im->trueColor)
     {
       return gdTrueColorAlpha (r, g, b, a);
     }
   for (i = 0; (i < (im->colorsTotal)); i++)
     {
-      long dist;
+      int64_t dist;
       if (im->open[i])
 	{
 	  continue;
@@ -534,8 +534,8 @@ BGD_DECLARE(int) gdImageColorResolveAlpha (gdImagePtr im, int r, int g, int b, i
   int c;
   int ct = -1;
   int op = -1;
-  long rd, gd, bd, ad, dist;
-  long mindist = 4 * 255 * 255;	/* init to max poss dist */
+  int64_t rd, gd, bd, ad, dist;
+  int64_t mindist = 4 * 255 * 255;	/* init to max poss dist */
   if (im->trueColor)
     {
       return gdTrueColorAlpha (r, g, b, a);
@@ -1581,9 +1581,9 @@ strlen16 (unsigned short *s)
    ** this hack
  */
 long
-lsqrt (long n)
+lsqrt (int64_t n)
 {
-  long result = (long) sqrt ((double) n);
+  int64_t result = (long) sqrt ((double) n);
   return result;
 }
 #endif
@@ -1705,7 +1705,7 @@ BGD_DECLARE(void) gdImageFilledArc (gdImagePtr im, int cx, int cy, int w, int h,
 BGD_DECLARE(void) gdImageFilledEllipse (gdImagePtr im, int mx, int my, int w, int h, int c)
 {
 	int x=0,mx1=0,mx2=0,my1=0,my2=0;
-	long aq,bq,dx,dy,r,rx,ry,a,b;
+	int64_t aq,bq,dx,dy,r,rx,ry,a,b;
 	int i;
 	int old_y1,old_y2;
 
@@ -3472,8 +3472,8 @@ static void gdImageSetAAPixelColor(gdImagePtr im, int x, int y, int color, int t
 static void gdImageAALine (gdImagePtr im, int x1, int y1, int x2, int y2, int col)
 {
 	/* keep them as 32bits */
-	long x, y, inc;
-	long dx, dy,tmp;
+	int64_t x, y, inc;
+	int64_t dx, dy,tmp;
 
 	if (!im->trueColor) {
 		/* TBB: don't crash when the image is of the wrong type */

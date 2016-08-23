@@ -19,7 +19,7 @@ static agerrlevel_t agerrno;		/* Last error level */
 static agerrlevel_t agerrlevel = AGWARN;	/* Report errors >= agerrlevel */
 static int agmaxerr;
 
-static long aglast;		/* Last message */
+static int64_t aglast;		/* Last message */
 static FILE *agerrout;		/* Message file */
 static agusererrf usererrf;     /* User-set error function */
 
@@ -40,8 +40,8 @@ agerrlevel_t agseterr(agerrlevel_t lvl)
 
 char *aglasterr()
 {
-    long endpos;
-    long len;
+    int64_t endpos;
+    int64_t len;
     char *buf;
 
     if (!agerrout)

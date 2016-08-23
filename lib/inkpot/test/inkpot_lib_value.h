@@ -11,7 +11,7 @@
  * Contributors: See CVS logs. Details at http://www.graphviz.org/
  *************************************************************************/
 
-unsigned long TAB_VALUES_64[SZT_VALUES_64] = {
+uint64_t TAB_VALUES_64[SZT_VALUES_64] = {
     0x000000000000ffff,  /* black */
     0x00000000ffffffff,  /* bleu, blue */
     0x0000ffff0000ffff,  /* green, vert */
@@ -21,7 +21,7 @@ unsigned long TAB_VALUES_64[SZT_VALUES_64] = {
     0xffffffffffffffff,  /* white */
 }; 
 
-unsigned long TAB_NONAME_VALUES_64[SZT_NONAME_VALUES_64] = {
+uint64_t TAB_NONAME_VALUES_64[SZT_NONAME_VALUES_64] = {
     0x000000008000ffff,
     0x00000000a400ffff,
     0x00000000c800ffff,

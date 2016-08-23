@@ -66,7 +66,7 @@ static int dynamicGetbuf (gdIOCtxPtr ctx, void *buf, int len);
 static int dynamicGetchar (gdIOCtxPtr ctx);
 
 static int dynamicSeek (struct gdIOCtx *, const int);
-static long dynamicTell (struct gdIOCtx *);
+static int64_t dynamicTell (struct gdIOCtx *);
 
 /* return data as a dynamic pointer */
 BGD_DECLARE(gdIOCtx *) gdNewDynamicCtx (int initialSize, void *data)

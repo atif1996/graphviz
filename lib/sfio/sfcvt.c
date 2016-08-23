@@ -35,7 +35,7 @@ int format;			/* conversion format            */
 #endif
 {
     reg char *sp;
-    reg long n, v;
+    reg int64_t n, v;
     reg char *ep, *buf, *endsp;
     static char *Buf;
 

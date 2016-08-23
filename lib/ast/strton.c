@@ -68,7 +68,7 @@
 long strton(const char *a, char **e, char *basep, int m)
 {
     register unsigned char *s = (unsigned char *) a;
-    register long n;
+    register int64_t n;
     register int c;
     register int base;
     register int shift;

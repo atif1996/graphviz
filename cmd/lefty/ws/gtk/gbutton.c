@@ -189,7 +189,7 @@ int GBdestroywidget(Gwidget_t * widget)
 gint bwcallback(GtkWidget * w, GdkEvent * event, gpointer * data)
 {
     Gwidget_t *widget;
-    unsigned long l;
+    uint64_t l;
 
     widget = findwidget((unsigned long) w, G_BUTTONWIDGET);
 

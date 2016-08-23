@@ -23,6 +23,7 @@
 #include "config.h"
 #endif
 
+#include <stdint.h>
 #include <cgraph.h>
 
 #include	 	<ctype.h>
@@ -110,12 +111,12 @@ int agstrclose(Agraph_t * g);
 void agmarkhtmlstr(char *s);
 
 	/* object set management */
-Agnode_t *agfindnode_by_id(Agraph_t * g, unsigned long id);
+Agnode_t *agfindnode_by_id(Agraph_t * g, uint64_t id);
 Dtcompar_f agdictorder(Agraph_t *, Dict_t *, Dtcompar_f);
 int agedgecmpf(Dict_t * d, void *arg_e0, void *arg_e1, Dtdisc_t * disc);
 int agnamecmpf(Dict_t * d, void *, void *, Dtdisc_t * disc);
 void agset_node_disc(Agraph_t * g, Dtdisc_t * disc);
-unsigned long agnextseq(Agraph_t * g, int objtype);
+uint64_t agnextseq(Agraph_t * g, int objtype);
 
 /* dict helper functions */
 Dict_t *agdtopen(Agraph_t * g, Dtdisc_t * disc, Dtmethod_t * method);
@@ -146,16 +147,16 @@ void aglexbad(void);
 
 	/* ID management */
 int agmapnametoid(Agraph_t * g, int objtype, char *str,
-		  unsigned long *result, int allocflag);
-int agallocid(Agraph_t * g, int objtype, unsigned long request);
-void agfreeid(Agraph_t * g, int objtype, unsigned long id);
+		  uint64_t *result, int allocflag);
+int agallocid(Agraph_t * g, int objtype, uint64_t request);
+void agfreeid(Agraph_t * g, int objtype, uint64_t id);
 char *agprintid(Agobj_t * obj);
 int aginternalmaplookup(Agraph_t * g, int objtype, char *str,
-			unsigned long *result);
+			uint64_t *result);
 void aginternalmapinsert(Agraph_t * g, int objtype, char *str,
-			 unsigned long result);
-char *aginternalmapprint(Agraph_t * g, int objtype, unsigned long id);
-int aginternalmapdelete(Agraph_t * g, int objtype, unsigned long id);
+			 uint64_t result);
+char *aginternalmapprint(Agraph_t * g, int objtype, uint64_t id);
+int aginternalmapdelete(Agraph_t * g, int objtype, uint64_t id);
 void aginternalmapclose(Agraph_t * g);
 void agregister(Agraph_t * g, int objtype, void *obj);
 

@@ -113,7 +113,7 @@ extern void yyerror(const char *fmt, ...);
 #if ! defined (YYSTYPE) && ! defined (YYSTYPE_IS_DECLARED)
 #line 37 "../../../cmd/lefty/dot2l/dotparse.y"
 typedef union YYSTYPE {
-    long i;
+    int64_t i;
     char *s;
     void *o;
 } YYSTYPE;
@@ -1000,7 +1000,7 @@ yyparse ()
 
 
       YYDPRINTF ((stderr, "Stack size increased to %lu\n",
-		  (unsigned long int) yystacksize));
+		  (uint64_t) yystacksize));
 
       if (yyss + yystacksize - 1 <= yyssp)
 	YYABORT;

@@ -34,7 +34,7 @@ typedef struct graphframe_t {
     struct graphframe_t *next;
     Tobj g, graphs, nodes, edges;
     Tobj gattr, nattr, eattr, ecopy;
-    long emark;
+    int64_t emark;
     struct edgeframe_t *estack;
 } graphframe_t;
 

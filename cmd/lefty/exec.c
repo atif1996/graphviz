@@ -111,13 +111,13 @@ typedef struct tnk_t {
 typedef struct Num_t {
     int type;
     union {
-        long i;
+        int64_t i;
         double d;
         Tobj no;
     } u;
 } Num_t;
 
-static long rootm;
+static int64_t rootm;
 static int running;
 
 static Tobj eeval (Tobj, int);
@@ -165,7 +165,7 @@ void Eterm (void) {
 Tobj Eunit (Tobj co) {
     volatile jmp_buf *oeljbufp;
     volatile int ownsinfoi;
-    volatile long m;
+    volatile int64_t m;
     volatile Tobj lrtno;
 
     jmp_buf eljbuf;
@@ -233,7 +233,7 @@ static Tobj eeval (Tobj co, int ci) {
     int ctype;
     tnk_t tnk;
     Num_t lnum, rnum;
-    long m1, m2;
+    int64_t m1, m2;
     int i1, i2, res;
 
 tailrec:
@@ -430,7 +430,7 @@ tailrec:
 
 static Tobj efcall (Tobj co, int ci) {
     volatile jmp_buf *opljbufp1, *opljbufp2;
-    volatile long m;
+    volatile int64_t m;
     volatile int bi, ownsinfoi, li, ln;
 
     jmp_buf pljbuf;
@@ -622,7 +622,7 @@ static void eforinst (Tobj co, int ci) {
     volatile Tobj tblo, c1o;
     volatile Tkvindex_t tkvi;
     volatile tnk_t tnk;
-    volatile long tm, km, t;
+    volatile int64_t tm, km, t;
     volatile int ei1, ei2, si;
 
     c1o = (Tobj) co; /* protect argument from longjmp */
@@ -717,7 +717,7 @@ static Tobj getval (Tobj co, int ci) {
 static int getvar (Tobj co, int ci, tnk_t *tnkp) {
     Tobj cvo, cko, cto;
     int ct, vt;
-    long m;
+    int64_t m;
     int vi, ovi, nn, ni;
 
     nn = 0;
@@ -826,7 +826,7 @@ static void setvar (tnk_t tnk, Tobj vo) {
 }
 
 static int boolop (Tobj vo) {
-    long i;
+    int64_t i;
     double d;
 
     if (!vo)
@@ -850,7 +850,7 @@ static int boolop (Tobj vo) {
 
 static int orderop (Tobj v1o, int op, Tobj v2o) {
     int t1, t2;
-    long i1, i2;
+    int64_t i1, i2;
     int r;
     double d1, d2;
 

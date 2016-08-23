@@ -50,7 +50,7 @@ extern "C" {
 #define extern		__EXPORT__
 #endif
 
-    extern long strkey(const char *);
+    extern int64_t strkey(const char *);
 
 #undef	extern
 

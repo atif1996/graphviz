@@ -57,7 +57,7 @@ int Cnew (int ctype) {
     return i;
 }
 
-int Cinteger (long i) {
+int Cinteger (int64_t i) {
     int j;
 
     if (cbufi >= cbufn) {

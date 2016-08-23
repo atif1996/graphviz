@@ -90,7 +90,7 @@ int main(int argc, char **argv)
     generic_list_t *attr_list;
     generic_list_t *node_list;
 
-    unsigned long i, j;
+    uint64_t i, j;
 
     opterr = 0;
 

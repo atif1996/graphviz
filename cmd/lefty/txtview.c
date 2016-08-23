@@ -31,7 +31,7 @@ typedef struct txtnode_t {
     int mode;
     int ttype;
     Tobj ko, vo;
-    long time;
+    int64_t time;
     char *path;
     union {
         struct {
@@ -62,7 +62,7 @@ static txtnode_t *txtroot;
 static txtnode_t defnode;
 
 static txtnode_t **seenp;
-static long seeni, seenn;
+static int64_t seeni, seenn;
 #define SEENINCR 100
 #define SEENSIZE sizeof (txtnode_t)
 
@@ -331,9 +331,9 @@ void TXTtoggle (int wi, void *data) {
 }
 
 /* update is called only for TXT_FULL tables */
-static void update (txtnode_t *pnode, long ptim) {
+static void update (txtnode_t *pnode, int64_t ptim) {
     txtnode_t *cnode, *seennode;
-    long ctim;
+    int64_t ctim;
     int i;
 
     Gawsetmode (&Gwidgets[pnode->u.f.t.mwi], TRUE);

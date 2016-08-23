@@ -34,7 +34,7 @@ extern "C" {
 
 typedef struct Tinteger_t {
     Mheader_t head;
-    long i;
+    int64_t i;
 } Tinteger_t;
 #define T_INTEGERSIZE sizeof (Tinteger_t)
 typedef struct Treal_t {
@@ -58,29 +58,29 @@ typedef struct Tkv_t {
 } Tkv_t;
 #define T_KVSIZE sizeof (Tkv_t)
 typedef struct Tkvlist_t {
-    long i, n;
+    int64_t i, n;
     Tkv_t kv[1];
 } Tkvlist_t;
 #define T_KVLISTSIZE(l) (l * T_KVSIZE + Tkvoffset)
 #define T_KVLISTPTRSIZE sizeof (Tkvlist_t *)
 typedef struct Ttable_t {
     Mheader_t head;
-    long n, ln;
-    long time;
+    int64_t n, ln;
+    int64_t time;
     Tkvlist_t **lp;
 } Ttable_t;
 #define T_TABLESIZE sizeof (Ttable_t)
 typedef struct Tkvindex_t {
     Ttable_t *tp;
     Tkv_t *kvp;
-    long i, j;
+    int64_t i, j;
 } Tkvindex_t;
 
 typedef void *Tobj;
 
 typedef struct Tonm_t { /* Object aNd Mark */
     Tobj o;
-    long m;
+    int64_t m;
 } Tonm_t;
 
 #define T_ISSTRING(o)  (M_TYPEOF (o) == T_STRING)
@@ -107,7 +107,7 @@ typedef struct Tonm_t { /* Object aNd Mark */
 #define TCgetnext(p, off)    ((Tgetcode (p) + off)->next)
 #define TCgetaddr(p, off)    (Tgetcode (p) + off)
 
-extern long Ttime;
+extern int64_t Ttime;
 extern int Tstringoffset, Tcodeoffset, Tkvoffset;
 extern Tobj Ttrue, Tfalse;
 

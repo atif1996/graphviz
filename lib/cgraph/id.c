@@ -21,11 +21,11 @@ static void *idopen(Agraph_t * g, Agdisc_t* disc)
     return g;
 }
 
-static long idmap(void *state, int objtype, char *str, unsigned long *id,
+static int64_t idmap(void *state, int objtype, char *str, uint64_t *id,
 		  int createflag)
 {
     char *s;
-    static unsigned long ctr = 1;
+    static uint64_t ctr = 1;
 
     NOTUSED(objtype);
     if (str) {
@@ -44,7 +44,7 @@ static long idmap(void *state, int objtype, char *str, unsigned long *id,
 }
 
 	/* we don't allow users to explicitly set IDs, either */
-static long idalloc(void *state, int objtype, unsigned long request)
+static int64_t idalloc(void *state, int objtype, uint64_t request)
 {
     NOTUSED(state);
     NOTUSED(objtype);
@@ -52,14 +52,14 @@ static long idalloc(void *state, int objtype, unsigned long request)
     return FALSE;
 }
 
-static void idfree(void *state, int objtype, unsigned long id)
+static void idfree(void *state, int objtype, uint64_t id)
 {
     NOTUSED(objtype);
     if (id % 2 == 0)
 	agstrfree((Agraph_t *) state, (char *) id);
 }
 
-static char *idprint(void *state, int objtype, unsigned long id)
+static char *idprint(void *state, int objtype, uint64_t id)
 {
     NOTUSED(state);
     NOTUSED(objtype);
@@ -94,7 +94,7 @@ Agiddisc_t AgIdDisc = {
 /* aux functions incl. support for disciplines with anonymous IDs */
 
 int agmapnametoid(Agraph_t * g, int objtype, char *str,
-		  unsigned long *result, int createflag)
+		  uint64_t *result, int createflag)
 {
     int rv;
 
@@ -123,12 +123,12 @@ int agmapnametoid(Agraph_t * g, int objtype, char *str,
     return rv;
 }
 
-int agallocid(Agraph_t * g, int objtype, unsigned long request)
+int agallocid(Agraph_t * g, int objtype, uint64_t request)
 {
     return AGDISC(g, id)->alloc(AGCLOS(g, id), objtype, request);
 }
 
-void agfreeid(Agraph_t * g, int objtype, unsigned long id)
+void agfreeid(Agraph_t * g, int objtype, uint64_t id)
 {
     (void) aginternalmapdelete(g, objtype, id);
     (AGDISC(g, id)->free) (AGCLOS(g, id), objtype, id);

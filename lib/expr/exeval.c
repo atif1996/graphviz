@@ -925,7 +925,7 @@ xPrint(Expr_t * ex, Exnode_t * expr, Extype_t v, Exnode_t * tmp)
 /*
  * internal exeval
  */
-static long seed;
+static int64_t seed;
 
 static Extype_t
 eval(Expr_t* ex, register Exnode_t* expr, void* env)

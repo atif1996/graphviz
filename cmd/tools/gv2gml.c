@@ -44,7 +44,7 @@
 static FILE *outFile;
 static char *CmdName;
 static char **Files;
-static unsigned long id;
+static uint64_t id;
 
 #define streq(s,t) (!strcmp(s,t))
 
@@ -94,7 +94,7 @@ typedef struct {
 
 typedef struct Agnodeinfo_t {
     Agrec_t h;
-    unsigned long id;
+    uint64_t id;
 } Agnodeinfo_t;
 
 #define ID(n)  (((Agnodeinfo_t*)(n->base.data))->id)

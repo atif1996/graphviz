@@ -402,7 +402,7 @@ int Isplit (int argc, lvar_t *argv) {
     Tobj so, fo;
     char *sp, *sp2, *s;
     char fc, tc, qmode;
-    long rtnm, rtni;
+    int64_t rtnm, rtni;
     int bufi, qflag;
 
     if (

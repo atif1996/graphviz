@@ -152,7 +152,7 @@ int GTgetwidgetattr(Gwidget_t * widget, int attrn, Gwattr_t * attrp)
     int width, height;
     GtkWidget w;
     int rtn, ai;
-    long fi, li;
+    int64_t fi, li;
 
     for (ai = 0; ai < attrn; ai++) {
 	switch (attrp[ai].id) {

@@ -487,7 +487,7 @@ va_list args;
 	    else
 #endif
 	    if (sizeof(long) > sizeof(int) && FMTCMP(size, long, Sflong_t))
-		*((long *) value) = (long) (n_input + SFLEN(f));
+		*((int64_t *) value) = (long) (n_input + SFLEN(f));
 	    else if (sizeof(short) < sizeof(int) &&
 		     FMTCMP(size, short, Sflong_t))
 		*((short *) value) = (short) (n_input + SFLEN(f));
@@ -688,7 +688,7 @@ va_list args;
 		else if (sizeof(long) > sizeof(int) &&
 			 FMTCMP(size, long, Sflong_t)) {
 		    if (fmt == 'd' || fmt == 'i')
-			*((long *) value) = (long) argv.ll;
+			*((int64_t *) value) = (long) argv.ll;
 		    else
 			*((ulong *) value) = (ulong) argv.lu;
 		} else if (sizeof(short) < sizeof(int) &&

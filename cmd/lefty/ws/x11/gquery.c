@@ -173,7 +173,7 @@ int GQqueryask (
     Window rwin, cwin;
     Dimension width, height;
     int rx, ry, x, y;
-    long i;
+    int64_t i;
     unsigned int mask;
     Widget widgets[20];
     char buttons[20][40];

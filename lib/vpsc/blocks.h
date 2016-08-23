@@ -58,5 +58,5 @@ private:
 	int nvs;
 };
 
-extern long blockTimeCtr;
+extern int64_t blockTimeCtr;
 #endif // SEEN_REMOVEOVERLAP_BLOCKS_H

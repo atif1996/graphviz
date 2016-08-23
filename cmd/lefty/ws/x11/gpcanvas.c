@@ -28,7 +28,7 @@
 #define PSYOFF 18
 
 static PIXsize_t maxsize = { PSMAXPIXW, PSMAXPIXH };
-static long count;
+static int64_t count;
 
 #define WPU widget->u.p
 #define FP widget->u.p->fp

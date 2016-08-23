@@ -215,11 +215,11 @@ static int idfn(htmldata_t * p, char *v)
  * String s is name of value.
  * Return 0 if okay; 1 otherwise.
  */
-static int doInt(char *v, char *s, int min, int max, long *ul)
+static int doInt(char *v, char *s, int min, int max, int64_t *ul)
 {
     int rv = 0;
     char *ep;
-    long b = strtol(v, &ep, 10);
+    int64_t b = strtol(v, &ep, 10);
 
     if (ep == v) {
 	agerr(AGWARN, "Improper %s value %s - ignored", s, v);
@@ -238,7 +238,7 @@ static int doInt(char *v, char *s, int min, int max, long *ul)
 
 static int gradientanglefn(htmldata_t * p, char *v)
 {
-    long u;
+    int64_t u;
 
     if (doInt(v, "GRADIENTANGLE", 0, 360, &u))
 	return 1;
@@ -249,7 +249,7 @@ static int gradientanglefn(htmldata_t * p, char *v)
 
 static int borderfn(htmldata_t * p, char *v)
 {
-    long u;
+    int64_t u;
 
     if (doInt(v, "BORDER", 0, MAX_UCHAR, &u))
 	return 1;
@@ -260,7 +260,7 @@ static int borderfn(htmldata_t * p, char *v)
 
 static int cellpaddingfn(htmldata_t * p, char *v)
 {
-    long u;
+    int64_t u;
 
     if (doInt(v, "CELLPADDING", 0, MAX_UCHAR, &u))
 	return 1;
@@ -271,7 +271,7 @@ static int cellpaddingfn(htmldata_t * p, char *v)
 
 static int cellspacingfn(htmldata_t * p, char *v)
 {
-    long u;
+    int64_t u;
 
     if (doInt(v, "CELLSPACING", MIN_CHAR, MAX_CHAR, &u))
 	return 1;
@@ -282,7 +282,7 @@ static int cellspacingfn(htmldata_t * p, char *v)
 
 static int cellborderfn(htmltbl_t * p, char *v)
 {
-    long u;
+    int64_t u;
 
     if (doInt(v, "CELLSBORDER", 0, MAX_CHAR, &u))
 	return 1;
@@ -387,7 +387,7 @@ static int balignfn(htmldata_t * p, char *v)
 
 static int heightfn(htmldata_t * p, char *v)
 {
-    long u;
+    int64_t u;
 
     if (doInt(v, "HEIGHT", 0, MAX_USHORT, &u))
 	return 1;
@@ -397,7 +397,7 @@ static int heightfn(htmldata_t * p, char *v)
 
 static int widthfn(htmldata_t * p, char *v)
 {
-    long u;
+    int64_t u;
 
     if (doInt(v, "WIDTH", 0, MAX_USHORT, &u))
 	return 1;
@@ -407,7 +407,7 @@ static int widthfn(htmldata_t * p, char *v)
 
 static int rowspanfn(htmlcell_t * p, char *v)
 {
-    long u;
+    int64_t u;
 
     if (doInt(v, "ROWSPAN", 0, MAX_USHORT, &u))
 	return 1;
@@ -421,7 +421,7 @@ static int rowspanfn(htmlcell_t * p, char *v)
 
 static int colspanfn(htmlcell_t * p, char *v)
 {
-    long u;
+    int64_t u;
 
     if (doInt(v, "COLSPAN", 0, MAX_USHORT, &u))
 	return 1;
@@ -447,7 +447,7 @@ static int facefn(textfont_t * p, char *v)
 
 static int ptsizefn(textfont_t * p, char *v)
 {
-    long u;
+    int64_t u;
 
     if (doInt(v, "POINT-SIZE", 0, MAX_UCHAR, &u))
 	return 1;

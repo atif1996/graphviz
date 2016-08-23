@@ -257,9 +257,9 @@ int line;			/* and line number                      */
 ** if block is live, 0 if no match.
 */
 #if __STD_C
-static long dbaddr(Vmalloc_t * vm, Void_t * addr)
+static int64_t dbaddr(Vmalloc_t * vm, Void_t * addr)
 #else
-static long dbaddr(vm, addr)
+static int64_t dbaddr(vm, addr)
 Vmalloc_t *vm;
 Void_t *addr;
 #endif
@@ -267,7 +267,7 @@ Void_t *addr;
     reg Block_t *b = NULL, *endb = NULL;
     reg Seg_t *seg;
     reg Vmuchar_t *data;
-    reg long offset = -1L;
+    reg int64_t offset = -1L;
     reg Vmdata_t *vd = vm->data;
     reg int local;
 
@@ -320,16 +320,16 @@ Void_t *addr;
 
 
 #if __STD_C
-static long dbsize(Vmalloc_t * vm, Void_t * addr)
+static int64_t dbsize(Vmalloc_t * vm, Void_t * addr)
 #else
-static long dbsize(vm, addr)
+static int64_t dbsize(vm, addr)
 Vmalloc_t *vm;
 Void_t *addr;
 #endif
 {
     reg Block_t *b, *endb;
     reg Seg_t *seg;
-    reg long size;
+    reg int64_t size;
     reg Vmdata_t *vd = vm->data;
 
     if (ISLOCK(vd, 0))
@@ -420,7 +420,7 @@ Void_t *data;
 {
     char *file;
     int line;
-    reg long offset;
+    reg int64_t offset;
     reg int *ip, *endip;
     reg Vmdata_t *vd = vm->data;
 
@@ -481,7 +481,7 @@ int type;			/* !=0 for movable, >0 for copy */
 {
     reg Vmuchar_t *data;
     reg size_t s, oldsize;
-    reg long offset;
+    reg int64_t offset;
     char *file, *oldfile;
     int line, oldline;
     reg Vmdata_t *vd = vm->data;

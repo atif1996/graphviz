@@ -138,7 +138,7 @@ char *mode;			/* mode of the stream */
 #if _PACKAGE_ast
     reg Proc_t *proc;
     reg int sflags;
-    reg long flags;
+    reg int64_t flags;
     reg int bits;
     char *av[4];
 

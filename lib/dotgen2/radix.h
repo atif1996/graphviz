@@ -3,4 +3,4 @@ typedef struct radixrec_s {
 	void	*data;
 } radixrec_t;
 
-void radix_sort(radixrec_t *source, unsigned long N);
+void radix_sort(radixrec_t *source, uint64_t N);

@@ -665,16 +665,16 @@ reg size_t size;		/* desired block size           */
 }
 
 #if __STD_C
-static long bestaddr(Vmalloc_t * vm, Void_t * addr)
+static int64_t bestaddr(Vmalloc_t * vm, Void_t * addr)
 #else
-static long bestaddr(vm, addr)
+static int64_t bestaddr(vm, addr)
 Vmalloc_t *vm;			/* region allocating from       */
 Void_t *addr;			/* address to check             */
 #endif
 {
     reg Seg_t *seg;
     reg Block_t *b, *endb;
-    reg long offset;
+    reg int64_t offset;
     reg Vmdata_t *vd = vm->data;
     reg int local;
     b = 0;
@@ -902,7 +902,7 @@ int type;			/* !=0 to move, <0 for not copy */
 		    d = (int *) data;
 		    INTCOPY(d, ed, s);
 		}
-	      do_free:		/* delay reusing these blocks as long as possible */
+	      do_free:		/* delay reusing these blocks as int64_t as possible */
 		SETJUNK(SIZE(rp));
 		LINK(rp) = *(cache = CACHE(vd) + S_CACHE);
 		*cache = rp;
@@ -933,16 +933,16 @@ int type;			/* !=0 to move, <0 for not copy */
 }
 
 #if __STD_C
-static long bestsize(Vmalloc_t * vm, Void_t * addr)
+static int64_t bestsize(Vmalloc_t * vm, Void_t * addr)
 #else
-static long bestsize(vm, addr)
+static int64_t bestsize(vm, addr)
 Vmalloc_t *vm;			/* region allocating from       */
 Void_t *addr;			/* address to check             */
 #endif
 {
     reg Seg_t *seg;
     reg Block_t *b, *endb;
-    reg long size;
+    reg int64_t size;
     reg Vmdata_t *vd = vm->data;
 
     if (!(vd->mode & VM_TRUST)) {

@@ -160,7 +160,7 @@ static void pic_set_style(GVJ_t *job, char **s)
         p++;
         while (*p) {
             if (!strcmp(line, "setlinewidth")) {        /* a hack to handle the user-defined (PS) style spec in proc3d.gv */
-                long n = atol(p);
+                int64_t n = atol(p);
 
                 sprintf(buf,
                         "oldlinethick = linethick;linethick = %ld * scalethickness / %.0f\n",
@@ -241,8 +241,8 @@ static int picColorResolve(int *new, int r, int g, int b)
     static short red[maxColors], green[maxColors], blue[maxColors];
     int c;
     int ct = -1;
-    long rd, gd, bd, dist;
-    long mindist = 3 * 255 * 255;       /* init to max poss dist */
+    int64_t rd, gd, bd, dist;
+    int64_t mindist = 3 * 255 * 255;       /* init to max poss dist */
 
     *new = 0;                   /* in case it is not a new color */
     for (c = 0; c < top; c++) {

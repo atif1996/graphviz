@@ -43,9 +43,9 @@ typedef struct map_tt {
     struct mapentry_t *list[MAPLISTN];
 } map_tt;
 static map_tt map;
-static long mapentrybyte2size;
+static int64_t mapentrybyte2size;
 
-static long truem, falsem;
+static int64_t truem, falsem;
 
 static Tinteger_t keyi;
 static Treal_t keyr;
@@ -100,7 +100,7 @@ void Tgchelper(void *p)
 {
     Ttable_t *tp;
     Tkvlist_t *kvlp;
-    long i, j;
+    int64_t i, j;
 
     /* must be a table */
     tp = (Ttable_t *) p;
@@ -114,7 +114,7 @@ void Tfreehelper(void *p)
 {
     Ttable_t *tp;
     Tkvlist_t *kvlp;
-    long i;
+    int64_t i;
 
     /* must be a table */
     tp = (Ttable_t *) p;
@@ -124,7 +124,7 @@ void Tfreehelper(void *p)
     Mfree(tp->lp, M_BYTE2SIZE(tp->ln * T_KVLISTPTRSIZE));
 }
 
-Tobj Tinteger(long i)
+Tobj Tinteger(int64_t i)
 {
     Tinteger_t *ip;
 
@@ -197,11 +197,11 @@ Tobj Tcode(Code_t * cp, int ci, int cl)
     return codep;
 }
 
-Tobj Ttable(long sizehint)
+Tobj Ttable(int64_t sizehint)
 {
     Ttable_t *tp;
     Tkvlist_t **lp;
-    long i;
+    int64_t i;
 
     sizehint = (sizehint < 2) ? 2 : sizehint;
     tp = Mnew(T_TABLESIZE, T_TABLE);
@@ -216,9 +216,9 @@ Tobj Ttable(long sizehint)
 }
 
 
-void Tinsi(Tobj to, long ik, Tobj vo)
+void Tinsi(Tobj to, int64_t ik, Tobj vo)
 {
-    long tm;
+    int64_t tm;
 
     if (!to || !T_ISTABLE(to))
 	panic1(POS, "Tinsi", "insert attempted on non-table");
@@ -232,7 +232,7 @@ void Tinsi(Tobj to, long ik, Tobj vo)
 
 void Tinsr(Tobj to, double rk, Tobj vo)
 {
-    long tm;
+    int64_t tm;
 
     if (!to || !T_ISTABLE(to))
 	panic1(POS, "Tinsr", "insert attempted on non-table");
@@ -246,7 +246,7 @@ void Tinsr(Tobj to, double rk, Tobj vo)
 
 void Tinss(Tobj to, char *sk, Tobj vo)
 {
-    long tm;
+    int64_t tm;
 
     if (!to || !T_ISTABLE(to))
 	panic1(POS, "Tinss", "insert attempted on non-table");
@@ -259,7 +259,7 @@ void Tinss(Tobj to, char *sk, Tobj vo)
 
 void Tinso(Tobj to, Tobj ko, Tobj vo)
 {
-    long tm;
+    int64_t tm;
 
     if (!to || !T_ISTABLE(to))
 	panic1(POS, "Tinso", "insert attempted on non-table");
@@ -273,7 +273,7 @@ void Tinso(Tobj to, Tobj ko, Tobj vo)
     Mpopmark(tm);
 }
 
-Tobj Tfindi(Tobj to, long ik)
+Tobj Tfindi(Tobj to, int64_t ik)
 {
     if (!to)
 	return NULL;
@@ -313,7 +313,7 @@ Tobj Tfindo(Tobj to, Tobj ko)
     return find(to, ko, NULL);
 }
 
-void Tdeli(Tobj to, long ik)
+void Tdeli(Tobj to, int64_t ik)
 {
     if (!to)
 	return;
@@ -356,7 +356,7 @@ void Tdelo(Tobj to, Tobj ko)
 Tobj Tcopy(Tobj fmvo)
 {
     Tobj tovo;
-    long m;
+    int64_t m;
 
     switch (M_TYPEOF(fmvo)) {
     case T_INTEGER:
@@ -414,7 +414,7 @@ static void insert(Ttable_t * tp, Tobj ko, char *sk, Tobj vo)
     Tkvlist_t *kvlp, *nkvlp;
     Tkv_t *kvp;
     Ttype_t kt;
-    long ik, i, ind, nln;
+    int64_t ik, i, ind, nln;
     double rk;
 
     switch ((kt = M_TYPEOF(ko))) {
@@ -495,7 +495,7 @@ static Tobj find(Ttable_t * tp, Tobj ko, char *sk)
 {
     Tkvlist_t *kvlp;
     Tkv_t *kvp;
-    long ik, i;
+    int64_t ik, i;
     double rk;
 
     switch (M_TYPEOF(ko)) {
@@ -532,7 +532,7 @@ static void delete(Ttable_t * tp, Tobj ko, char *sk)
 {
     Tkvlist_t *kvlp;
     Tkv_t *kvp;
-    long ik, i, j;
+    int64_t ik, i, j;
     double rk;
 
     switch (M_TYPEOF(ko)) {
@@ -569,12 +569,12 @@ static void delete(Ttable_t * tp, Tobj ko, char *sk)
     tp->time = Ttime;
 }
 
-static void copytable(Ttable_t * tp, long ln)
+static void copytable(Ttable_t * tp, int64_t ln)
 {
     Tkvlist_t **olp, **lp;
     Tkvlist_t *okvlp, *kvlp, *nkvlp;
     Tkv_t *kvp;
-    long ik, oln, i, j, k, ind;
+    int64_t ik, oln, i, j, k, ind;
     double rk;
     char *sk;
 
@@ -626,7 +626,7 @@ static void copytable(Ttable_t * tp, long ln)
 static void reccopytable(Ttable_t * fmtp, Ttable_t * totp)
 {
     Tkv_t *fmkvp, *tokvp;
-    long i, j, m;
+    int64_t i, j, m;
 
     totp->lp = Mallocate((long) (fmtp->ln * T_KVLISTPTRSIZE));
     totp->ln = fmtp->ln;
@@ -671,7 +671,7 @@ static void reccopytable(Ttable_t * fmtp, Ttable_t * totp)
 
 static void mapinit(void)
 {
-    long li;
+    int64_t li;
 
     for (li = 0; li < MAPLISTN; li++)
 	map.list[li] = NULL;
@@ -681,7 +681,7 @@ static void mapterm(void)
 {
     mapentry_t **lp;
     mapentry_t *cep, *nep;
-    long li;
+    int64_t li;
 
     for (li = 0; li < MAPLISTN; li++) {
 	lp = &map.list[li];

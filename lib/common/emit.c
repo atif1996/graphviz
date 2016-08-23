@@ -202,7 +202,7 @@ getObjId (GVJ_t* job, void* obj, agxbuf* xb)
     char* id;
     graph_t* root = job->gvc->g;
     char* gid = GD_drawing(root)->id;
-    long idnum;
+    int64_t idnum;
     char* pfx;
     char buf[64]; /* large enough for a decimal 64-bit int */
 

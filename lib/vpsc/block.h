@@ -57,7 +57,7 @@ public:
 	void setUpOutConstraints();
 	double cost();
 	bool deleted;
-	long timeStamp;
+	int64_t timeStamp;
 	PairingHeap<Constraint*> *in;
 	PairingHeap<Constraint*> *out;
 private:

@@ -636,7 +636,7 @@ printSorted (Agraph_t* root, int c_cnt)
 static int processClusters(Agraph_t * g, char* graphName)
 {
     Agraph_t *dg;
-    long n_cnt, c_cnt, e_cnt;
+    int64_t n_cnt, c_cnt, e_cnt;
     char *name;
     Agraph_t *out;
     Agnode_t *n;
@@ -760,7 +760,7 @@ bindGraphinfo (Agraph_t * g)
  */
 static int process(Agraph_t * g, char* graphName)
 {
-    long n_cnt, c_cnt, e_cnt;
+    int64_t n_cnt, c_cnt, e_cnt;
     char *name;
     Agraph_t *out;
     Agnode_t *n;

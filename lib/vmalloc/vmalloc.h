@@ -61,8 +61,8 @@ extern "C" {
 	Void_t *(*allocf) _ARG_((Vmalloc_t *, size_t));
 	Void_t *(*resizef) _ARG_((Vmalloc_t *, Void_t *, size_t, int));
 	int (*freef) _ARG_((Vmalloc_t *, Void_t *));
-	long (*addrf) _ARG_((Vmalloc_t *, Void_t *));
-	long (*sizef) _ARG_((Vmalloc_t *, Void_t *));
+	int64_t (*addrf) _ARG_((Vmalloc_t *, Void_t *));
+	int64_t (*sizef) _ARG_((Vmalloc_t *, Void_t *));
 	int (*compactf) _ARG_((Vmalloc_t *));
 	Void_t *(*alignf) _ARG_((Vmalloc_t *, size_t, size_t));
 	unsigned short meth;
@@ -146,8 +146,8 @@ extern "C" {
     extern Void_t *vmresize _ARG_((Vmalloc_t *, Void_t *, size_t, int));
     extern int vmfree _ARG_((Vmalloc_t *, Void_t *));
 
-    extern long vmaddr _ARG_((Vmalloc_t *, Void_t *));
-    extern long vmsize _ARG_((Vmalloc_t *, Void_t *));
+    extern int64_t vmaddr _ARG_((Vmalloc_t *, Void_t *));
+    extern int64_t vmsize _ARG_((Vmalloc_t *, Void_t *));
 
     extern Vmalloc_t *vmregion _ARG_((Void_t *));
     extern Void_t *vmsegment _ARG_((Vmalloc_t *, Void_t *));

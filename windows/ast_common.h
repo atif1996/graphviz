@@ -118,7 +118,7 @@ typedef int ssize_t;
 #define _ast_int1_t		char
 #define _ast_int2_t		short
 #define _ast_int4_t		int
-#define _ast_int8_t		long long
+#define _ast_int8_t		int64_t
 #define _ast_intmax_t		_ast_int8_t
 #define _ast_intswap		7
 

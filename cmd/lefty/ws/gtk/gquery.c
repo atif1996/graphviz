@@ -133,7 +133,7 @@ int GQqueryask(Gwidget_t * widget, char *prompt, char *args,
     char buttons[20][40];
     char *s1, *s2;
     char c;
-    long i;
+    int64_t i;
 
     switch (WQU->mode) {
     case G_QWSTRING:

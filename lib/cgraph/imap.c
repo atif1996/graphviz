@@ -16,7 +16,7 @@
 typedef struct IMapEntry_s {
     Dtlink_t namedict_link;
     Dtlink_t iddict_link;
-    unsigned long id;
+    uint64_t id;
     char *str;
 } IMapEntry_t;
 
@@ -71,7 +71,7 @@ static Dtdisc_t LookupById = {
 };
 
 int aginternalmaplookup(Agraph_t * g, int objtype, char *str,
-			unsigned long *result)
+			uint64_t *result)
 {
     Dict_t *d;
     IMapEntry_t *sym, template;
@@ -94,7 +94,7 @@ int aginternalmaplookup(Agraph_t * g, int objtype, char *str,
 
 /* caller GUARANTEES that this is a new entry */
 void aginternalmapinsert(Agraph_t * g, int objtype, char *str,
-			 unsigned long id)
+			 uint64_t id)
 {
     IMapEntry_t *ent;
     Dict_t *d_name_to_id, *d_id_to_name;
@@ -115,7 +115,7 @@ void aginternalmapinsert(Agraph_t * g, int objtype, char *str,
     dtinsert(d_id_to_name, ent);
 }
 
-static IMapEntry_t *find_isym(Agraph_t * g, int objtype, unsigned long id)
+static IMapEntry_t *find_isym(Agraph_t * g, int objtype, uint64_t id)
 {
     Dict_t *d;
     IMapEntry_t *isym, itemplate;
@@ -130,7 +130,7 @@ static IMapEntry_t *find_isym(Agraph_t * g, int objtype, unsigned long id)
     return isym;
 }
 
-char *aginternalmapprint(Agraph_t * g, int objtype, unsigned long id)
+char *aginternalmapprint(Agraph_t * g, int objtype, uint64_t id)
 {
     IMapEntry_t *isym;
 
@@ -140,7 +140,7 @@ char *aginternalmapprint(Agraph_t * g, int objtype, unsigned long id)
 }
 
 
-int aginternalmapdelete(Agraph_t * g, int objtype, unsigned long id)
+int aginternalmapdelete(Agraph_t * g, int objtype, uint64_t id)
 {
     IMapEntry_t *isym;
 

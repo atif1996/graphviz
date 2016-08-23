@@ -36,7 +36,7 @@ public:
 	Constraint(Variable *left, Variable *right, double gap, bool equality=false);
 	~Constraint();
 	inline double slack() const { return right->position() - gap - left->position(); }
-	long timeStamp;
+	int64_t timeStamp;
 	bool active;
 	bool visited;
 	bool equality;

@@ -39,17 +39,17 @@ typedef struct freeobj_t {
 #define FREEOBJSIZE sizeof (freeobj_t)
 #define FREESIZE sizeof (void *)
 static void **freearray;
-static long freen;
+static int64_t freen;
 
 #define MARKSIZE sizeof (void *)
 #define MARKINCR 100
 static void **markarray;
-static long markn, marki;
+static int64_t markn, marki;
 
 #define OTSIZE sizeof (void *)
 #define OTINCR 1000
 static void **otarray[2];
-static long otn, oti, otj;
+static int64_t otn, oti, otj;
 static char otarea[2];
 
 static void (*cbfunc) (void);
@@ -64,8 +64,8 @@ static int numofallocs = 0;
 
 #ifdef STATS
 static caddr_t origsbrk, finsbrk;
-static long objnum, objsiz;
-static long typenum[M_MAXTYPES], typesiz[M_MAXTYPES];
+static int64_t objnum, objsiz;
+static int64_t typenum[M_MAXTYPES], typesiz[M_MAXTYPES];
 #endif
 
 static void allocbuffer (long);
@@ -115,7 +115,7 @@ void Mterm (void) {
     bufferlist = NULL;
 }
 
-void *Mnew (long size, int type) {
+void *Mnew (int64_t size, int type) {
     freeobj_t *fp;
 
     size = (
@@ -142,7 +142,7 @@ void *Mnew (long size, int type) {
     return fp;
 }
 
-void *Mallocate (long size) {
+void *Mallocate (int64_t size) {
     freeobj_t *fp;
 
     size = (
@@ -154,7 +154,7 @@ void *Mallocate (long size) {
     return fp;
 }
 
-void Mfree (void *p, long size) {
+void Mfree (void *p, int64_t size) {
     freeobj_t *fp;
 
     fp = p;
@@ -166,7 +166,7 @@ void Mfree (void *p, long size) {
 
 #ifndef FEATURE_MS
 
-void *Marrayalloc (long size) {
+void *Marrayalloc (int64_t size) {
     void *p;
 
     if (!(p = malloc (size)))
@@ -174,7 +174,7 @@ void *Marrayalloc (long size) {
     return p;
 }
 
-void *Marraygrow (void *p, long size) {
+void *Marraygrow (void *p, int64_t size) {
     if (!(p = realloc (p, size)))
         panic1 (POS, "Marrayreallocate", "cannot re-allocate array");
     return p;
@@ -191,7 +191,7 @@ static struct arraymap_t {
     void *v;
 } arraymap[100];
 
-void *Marrayalloc (long size) {
+void *Marrayalloc (int64_t size) {
     int i;
 
     for (i = 0; i < 100; i++)
@@ -205,7 +205,7 @@ void *Marrayalloc (long size) {
     return arraymap[i].v;
 }
 
-void *Marraygrow (void *p, long size) {
+void *Marraygrow (void *p, int64_t size) {
     int i;
 
     for (i = 0; i < 100; i++)
@@ -247,14 +247,14 @@ long Mpushmark (void *p) {
     return marki - 1;
 }
 
-void Mpopmark (long m) {
+void Mpopmark (int64_t m) {
     if (m >= 0 && m < marki)
         marki = m;
     else
         warning (POS, "Mpopmark", "mark out of range");
 }
 
-void Mresetmark (long m, void *p) {
+void Mresetmark (int64_t m, void *p) {
     markarray[m] = p;
     if (Mgcstate == M_GCON)
         Mmkcurr (p);
@@ -274,9 +274,9 @@ void Mmkcurr (void *p) {
 
 void Mdogc (int gctype) {
     void *p;
-    long i;
+    int64_t i;
     char n;
-    static long prevoti;
+    static int64_t prevoti;
 
     if (Mgcstate == M_GCOFF) {
         Mgcstate = M_GCON;
@@ -326,8 +326,8 @@ void Mdogc (int gctype) {
 
 void Mreport (void) {
     Mheader_t *p;
-    long num[M_MAXTYPES], siz[M_MAXTYPES];
-    long i, n;
+    int64_t num[M_MAXTYPES], siz[M_MAXTYPES];
+    int64_t i, n;
     freeobj_t *fp;
 
     Mdogc (M_GCFULL);
@@ -368,10 +368,10 @@ void Mreport (void) {
 #endif
 }
 
-static void allocbuffer (long size) {
+static void allocbuffer (int64_t size) {
     buffer_t *bp;
     char *p;
-    long i, bytes, n;
+    int64_t i, bytes, n;
 
     if (size >= freen) {
         if (size > M_SIZEMAX)

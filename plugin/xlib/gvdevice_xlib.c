@@ -61,7 +61,7 @@
 
 typedef struct window_xlib_s {
     Window win;
-    unsigned long event_mask;
+    uint64_t event_mask;
     Pixmap pix;
     GC gc;
     Visual *visual;
@@ -275,7 +275,7 @@ static void init_window(GVJ_t *job, Display *dpy, int scr)
     XWMHints *wmhints;
     XSizeHints *normalhints;
     XClassHint *classhint;
-    unsigned long attributemask = 0;
+    uint64_t attributemask = 0;
     char *name;
     window_t *window;
     int w, h;

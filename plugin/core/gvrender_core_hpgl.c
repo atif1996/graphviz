@@ -105,8 +105,8 @@ static int hpglColorResolve(int *new, int r, int g, int b)
     static short red[maxColors], green[maxColors], blue[maxColors];
     int c;
     int ct = -1;
-    long rd, gd, bd, dist;
-    long mindist = 3 * 255 * 255;       /* init to max poss dist */
+    int64_t rd, gd, bd, dist;
+    int64_t mindist = 3 * 255 * 255;       /* init to max poss dist */
 
     *new = 0;                   /* in case it is not a new color */
     for (c = 0; c < top; c++) {

@@ -55,19 +55,19 @@ extern "C" {
        wide enough to hold a value of a pointer.  For most ANSI compilers
        ptrdiff_t and size_t should be likely OK.  Still size of these two
        types is 2 for Microsoft C.  Ugh... */
-    typedef long int s_reg_t;
-    typedef unsigned long int active_reg_t;
+    typedef int64_t s_reg_t;
+    typedef uint64_t active_reg_t;
 
     /* The following bits are used to determine the regexp syntax we
        recognize.  The set/not-set meanings are chosen so that Emacs syntax
        remains the value 0.  The bits are given in alphabetical order, and
        the definitions shifted by one from the previous bit; thus, when we
        add or remove a bit, only one other definition need change.  */
-    typedef unsigned long int reg_syntax_t;
+    typedef uint64_t reg_syntax_t;
 
     /* If this bit is not set, then \ inside a bracket expression is literal.
        If set, then such a \ quotes the following character.  */
-#define RE_BACKSLASH_ESCAPE_IN_LISTS ((unsigned long int) 1)
+#define RE_BACKSLASH_ESCAPE_IN_LISTS ((uint64_t int) 1)
 
     /* If this bit is not set, then + and ? are operators, and \+ and \? are
        literals.
@@ -339,10 +339,10 @@ extern "C" {
         unsigned char *buffer;
 
         /* Number of bytes to which `buffer' points.  */
-        unsigned long int allocated;
+        uint64_t allocated;
 
         /* Number of bytes actually used in `buffer'.  */
-        unsigned long int used;
+        uint64_t used;
 
         /* Syntax setting with which the pattern was compiled.  */
         reg_syntax_t syntax;

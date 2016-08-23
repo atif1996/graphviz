@@ -168,7 +168,7 @@ typedef struct Gwattr_t {
     int id;
     union {
         int i;
-        long l;
+        int64_t l;
         float f;
         double d;
         char *t;
@@ -177,7 +177,7 @@ typedef struct Gwattr_t {
         Grect_t r;
         Gcolor_t c;
         void *func;
-        unsigned long u;
+        uint64_t u;
     } u;
 } Gwattr_t;
 typedef struct Gwlist_t {
@@ -333,7 +333,7 @@ typedef struct Glw_t {
 
 /* --- menu --- */
 typedef struct Gmw_t {
-    long count;
+    int64_t count;
 } Gmw_t;
 #define MWSIZE sizeof (Gmw_t)
 
@@ -429,7 +429,7 @@ typedef struct Gwidget_t {
         Gtw_t *t;
         Gvw_t *v;
     } u;
-    unsigned long udata;
+    uint64_t udata;
 } Gwidget_t;
 #define WIDGETINCR 20
 #define WIDGETSIZE sizeof (Gwidget_t)

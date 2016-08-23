@@ -79,7 +79,7 @@ static void update (dnode_t *pnode) {
     dnode_t *list, *cnode;
     seennode_t *seennode;
     char *s;
-    long i, n;
+    int64_t i, n;
 
     indent += 2;
     n = ((Ttable_t *) pnode->vo)->n;

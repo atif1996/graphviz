@@ -133,7 +133,7 @@ static Agedge_t *agfindedge(Agnode_t * t, Agnode_t * h, Agtag_t key)
 }
 
 static Agedge_t *agfindedge_by_id(Agnode_t * t, Agnode_t * h,
-				  unsigned long id)
+				  uint64_t id)
 {
     Agtag_t tag;
 
@@ -180,7 +180,7 @@ void agedgesetop(Agraph_t * g, Agedge_t * e, int ins)
 
 /* creates new edge pair and returns outedge */
 static Agedgepair_t *newedgepair(Agraph_t * g, Agnode_t * t, Agnode_t * h,
-				 unsigned long id, unsigned long seq)
+				 uint64_t id, uint64_t seq)
 {
     Agedgepair_t *e2;
     Agedge_t *in, *out;
@@ -201,7 +201,7 @@ static Agedgepair_t *newedgepair(Agraph_t * g, Agnode_t * t, Agnode_t * h,
 }
 
 static Agedge_t *mklocaledge(Agraph_t * g, Agnode_t * arg_t,
-			     Agnode_t * arg_h, unsigned long id,
+			     Agnode_t * arg_h, uint64_t id,
 			     int *isnew)
 {
     Agedge_t *e, *epar;
@@ -246,7 +246,7 @@ static Agedge_t *mklocaledge(Agraph_t * g, Agnode_t * arg_t,
 }
 
 static Agedge_t *localedge(Agraph_t * g, Agnode_t * arg_t,
-			   Agnode_t * arg_h, unsigned long id)
+			   Agnode_t * arg_h, uint64_t id)
 {
     int isnew = FALSE;
     Agedge_t *e;
@@ -283,7 +283,7 @@ static int ok_to_make_edge(Agnode_t * t, Agnode_t * h)
     return TRUE;
 }
 
-Agedge_t *agidedge(Agnode_t * t, Agnode_t * h, unsigned long id, int cflag)
+Agedge_t *agidedge(Agnode_t * t, Agnode_t * h, uint64_t id, int cflag)
 {
     Agraph_t *g, *root;
     Agnode_t *tr, *hr;
@@ -309,7 +309,7 @@ Agedge_t *agedge(Agnode_t * t, Agnode_t * h, char *name, int cflag)
 {
     Agraph_t *g;
     Agedge_t *e;
-    unsigned long id;
+    uint64_t id;
     int have_id;
 
     if ((g = agraphof(t)) != agraphof(h))
@@ -477,7 +477,7 @@ Agedge_t *agopp(Agedge_t * e)
 	/* could be useful if we write relabel_edge */
 static Agedge_t *agfindedge_by_name(Agnode_t * t, Agnode_t * h, char *name)
 {
-    unsigned long id;
+    uint64_t id;
 
     if (agmapnametoid(agraphof(t), AGEDGE, name, &id, FALSE))
 	return agfindedge_by_id(t, h, id);

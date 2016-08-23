@@ -29,7 +29,7 @@
 #define SOCKET_PEEK	002
 
 #if __STD_C
-ssize_t sfpkrd(int fd, Void_t * argbuf, size_t n, int rc, long tm,
+ssize_t sfpkrd(int fd, Void_t * argbuf, size_t n, int rc, int64_t tm,
 	       int action)
 #else
 ssize_t sfpkrd(fd, argbuf, n, rc, tm, action)
@@ -152,9 +152,9 @@ int action;			/* >0: peeking, if rc>=0, get action records,
 	    if (r == -2) {
 #if !_lib_poll && !_lib_select	/* both poll and select cann't be used */
 #ifdef FIONREAD			/* quick and dirty check for availability */
-		long nsec = tm < 0 ? 0 : (tm + 999) / 1000;
+		int64_t nsec = tm < 0 ? 0 : (tm + 999) / 1000;
 		while (nsec > 0 && r < 0) {
-		    long avail = -1;
+		    int64_t avail = -1;
 		    if ((r = ioctl(fd, FIONREAD, &avail)) < 0) {
 			if (errno == EINTR)
 			    return -1;

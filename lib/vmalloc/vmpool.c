@@ -104,9 +104,9 @@ reg size_t size;
 }
 
 #if __STD_C
-static long pooladdr(Vmalloc_t * vm, reg Void_t * addr)
+static int64_t pooladdr(Vmalloc_t * vm, reg Void_t * addr)
 #else
-static long pooladdr(vm, addr)
+static int64_t pooladdr(vm, addr)
 Vmalloc_t *vm;
 reg Void_t *addr;
 #endif
@@ -115,7 +115,7 @@ reg Void_t *addr;
     reg Vmuchar_t *laddr, *baddr;
     reg size_t size;
     reg Seg_t *seg;
-    reg long offset;
+    reg int64_t offset;
     reg Vmdata_t *vd = vm->data;
     reg int local;
 
@@ -245,9 +245,9 @@ int type;
 }
 
 #if __STD_C
-static long poolsize(Vmalloc_t * vm, Void_t * addr)
+static int64_t poolsize(Vmalloc_t * vm, Void_t * addr)
 #else
-static long poolsize(vm, addr)
+static int64_t poolsize(vm, addr)
 Vmalloc_t *vm;
 Void_t *addr;
 #endif

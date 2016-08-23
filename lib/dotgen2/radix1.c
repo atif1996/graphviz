@@ -9,7 +9,7 @@
 // complicated expression better fits as macro (or inline in C++)
 #define ByteOf(x) (*(uchar *) (x))
 
-typedef unsigned long ulong;
+typedef uint64_t ulong;
 typedef unsigned char uchar;
 
 typedef struct rec_s {

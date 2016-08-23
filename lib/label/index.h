@@ -47,6 +47,7 @@ extern "C" {
 #define NODECARD 64
 typedef struct RTree RTree_t;
 
+#include <stdint.h>
 #include <rectangle.h>
 #include <node.h>
 #include <split.q.h>
@@ -78,7 +79,7 @@ typedef struct LeafList {
     int MinFill;
 
     /* times */
-    long ElapsedTime;
+    int64_t ElapsedTime;
     float UserTime, SystemTime;
 
     int Deleting;

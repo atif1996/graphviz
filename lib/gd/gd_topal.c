@@ -413,7 +413,7 @@ typedef struct
   /* The volume (actually 2-norm) of the box */
   INT32 volume;
   /* The number of nonzero histogram cells within this box */
-  long colorcount;
+  int64_t colorcount;
 }
 box;
 
@@ -426,7 +426,7 @@ LOCAL (boxptr) find_biggest_color_pop (boxptr boxlist, int numboxes)
 {
   register boxptr boxp;
   register int i;
-  register long maxc = 0;
+  register int64_t maxc = 0;
   boxptr which = NULL;
 
   for (i = 0, boxp = boxlist; i < numboxes; i++, boxp++)
@@ -478,7 +478,7 @@ LOCAL (void)
   int c0, c1, c2;
   int c0min, c0max, c1min, c1max, c2min, c2max;
   INT32 dist0, dist1, dist2;
-  long ccount;
+  int64_t ccount;
 
   c0min = boxp->c0min;
   c0max = boxp->c0max;
@@ -722,11 +722,11 @@ LOCAL (void)
   histptr histp;
   int c0, c1, c2;
   int c0min, c0max, c1min, c1max, c2min, c2max;
-  long count = 0; /* 2.0.28: = 0 */
-  long total = 0;
-  long c0total = 0;
-  long c1total = 0;
-  long c2total = 0;
+  int64_t count = 0; /* 2.0.28: = 0 */
+  int64_t total = 0;
+  int64_t c0total = 0;
+  int64_t c1total = 0;
+  int64_t c2total = 0;
 
   c0min = boxp->c0min;
   c0max = boxp->c0max;

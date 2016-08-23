@@ -32,10 +32,10 @@
 typedef int             code_int;
 
 #ifdef SIGNED_COMPARE_SLOW
-typedef unsigned long int count_int;
+typedef uint64_t count_int;
 typedef unsigned short int count_short;
 #else /*SIGNED_COMPARE_SLOW*/
-typedef long int          count_int;
+typedef int64_t          count_int;
 #endif /*SIGNED_COMPARE_SLOW*/
 
 /* 2.0.28: threadsafe */
@@ -52,7 +52,7 @@ typedef long int          count_int;
 typedef struct {
 	int Width, Height;
 	int curx, cury;
-	long CountDown;
+	int64_t CountDown;
 	int Pass;
 	int Interlace;
         int n_bits;                        /* number of bits/code */
@@ -66,15 +66,15 @@ typedef struct {
 	 */
 	int clear_flg;
 	int offset;
-	long int in_count;            /* length of input */
-	long int out_count;           /* # of codes output (for debugging) */
+	int64_t in_count;            /* length of input */
+	int64_t out_count;           /* # of codes output (for debugging) */
 
 	int g_init_bits;
 	gdIOCtx * g_outfile;
 
 	int ClearCode;
 	int EOFCode;
-	unsigned long cur_accum;
+	uint64_t cur_accum;
 	int cur_bits;
         /*
          * Number of characters so far in this 'packet'
@@ -927,7 +927,7 @@ output(code_int code, GifCtx *ctx);
 static void
 compress(int init_bits, gdIOCtxPtr outfile, gdImagePtr im, GifCtx *ctx)
 {
-    register long fcode;
+    register int64_t fcode;
     register code_int i /* = 0 */;
     register int c;
     register code_int ent;
@@ -1037,7 +1037,7 @@ nomatch:
  * code in turn.  When the buffer fills up empty it and start over.
  */
 
-static unsigned long masks[] = { 0x0000, 0x0001, 0x0003, 0x0007, 0x000F,
+static uint64_t masks[] = { 0x0000, 0x0001, 0x0003, 0x0007, 0x000F,
                                   0x001F, 0x003F, 0x007F, 0x00FF,
                                   0x01FF, 0x03FF, 0x07FF, 0x0FFF,
                                   0x1FFF, 0x3FFF, 0x7FFF, 0xFFFF };
@@ -1117,8 +1117,8 @@ cl_hash(register count_int chsize, GifCtx *ctx)          /* reset code table */
 
         register count_int *htab_p = ctx->htab+chsize;
 
-        register long i;
-        register long m1 = -1;
+        register int64_t i;
+        register int64_t m1 = -1;
 
         i = chsize - 16;
         do {                            /* might use Sys V memset(3) here */

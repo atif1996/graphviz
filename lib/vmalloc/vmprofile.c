@@ -629,9 +629,9 @@ int type;
 }
 
 #if __STD_C
-static long pfsize(Vmalloc_t * vm, Void_t * addr)
+static int64_t pfsize(Vmalloc_t * vm, Void_t * addr)
 #else
-static long pfsize(vm, addr)
+static int64_t pfsize(vm, addr)
 Vmalloc_t *vm;
 Void_t *addr;
 #endif
@@ -640,9 +640,9 @@ Void_t *addr;
 }
 
 #if __STD_C
-static long pfaddr(Vmalloc_t * vm, Void_t * addr)
+static int64_t pfaddr(Vmalloc_t * vm, Void_t * addr)
 #else
-static long pfaddr(vm, addr)
+static int64_t pfaddr(vm, addr)
 Vmalloc_t *vm;
 Void_t *addr;
 #endif

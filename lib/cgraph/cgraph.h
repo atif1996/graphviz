@@ -14,6 +14,7 @@
 #ifndef ATT_GRAPH_H
 #define ATT_GRAPH_H
 
+#include    <stdint.h>
 #include		"cdt.h"
 
 #ifdef __cplusplus
@@ -80,7 +81,7 @@ struct Agtag_s {
     unsigned mtflock:1;		/* move-to-front lock, see above */
     unsigned attrwf:1;		/* attrs written (parity, write.c) */
     unsigned seq:(sizeof(unsigned) * 8 - 4);	/* sequence no. */
-    unsigned long id;		/* client  ID */
+    uint64_t id;		/* client  ID */
 };
 
 	/* object tags */
@@ -157,11 +158,11 @@ struct Agmemdisc_s {		/* memory allocator */
 
 struct Agiddisc_s {		/* object ID allocator */
     void *(*open) (Agraph_t * g, Agdisc_t*);	/* associated with a graph */
-    long (*map) (void *state, int objtype, char *str, unsigned long *id,
+    int64_t (*map) (void *state, int objtype, char *str, uint64_t *id,
 		 int createflag);
-    long (*alloc) (void *state, int objtype, unsigned long id);
-    void (*free) (void *state, int objtype, unsigned long id);
-    char *(*print) (void *state, int objtype, unsigned long id);
+    int64_t (*alloc) (void *state, int objtype, uint64_t id);
+    void (*free) (void *state, int objtype, uint64_t id);
+    char *(*print) (void *state, int objtype, uint64_t id);
     void (*close) (void *state);
     void (*idregister) (void *state, int objtype, void *obj);
 };
@@ -223,7 +224,7 @@ struct Agclos_s {
     Agdisc_t disc;		/* resource discipline functions */
     Agdstate_t state;		/* resource closures */
     Dict_t *strdict;		/* shared string dict */
-    unsigned long seq[3];	/* local object sequence number counter */
+    uint64_t seq[3];	/* local object sequence number counter */
     Agcbstack_t *cb;		/* user and system callback function stacks */
     unsigned char callbacks_enabled;	/* issue user callbacks or hold them? */
     Dict_t *lookup_by_name[3];
@@ -273,7 +274,7 @@ extern int agissimple(Agraph_t * g);
 
 /* nodes */
 extern Agnode_t *agnode(Agraph_t * g, char *name, int createflag);
-extern Agnode_t *agidnode(Agraph_t * g, unsigned long id, int createflag);
+extern Agnode_t *agidnode(Agraph_t * g, uint64_t id, int createflag);
 extern Agnode_t *agsubnode(Agraph_t * g, Agnode_t * n, int createflag);
 extern Agnode_t *agfstnode(Agraph_t * g);
 extern Agnode_t *agnxtnode(Agraph_t * g, Agnode_t * n);
@@ -286,7 +287,7 @@ extern Agsubnode_t *agsubrep(Agraph_t * g, Agnode_t * n);
 extern Agedge_t *agedge(Agraph_t * g, Agnode_t * t, Agnode_t * h,
 			char *name, int createflag);
 extern Agedge_t *agidedge(Agraph_t * g, Agnode_t * t, Agnode_t * h,
-			  unsigned long id, int createflag);
+			  uint64_t id, int createflag);
 extern Agedge_t *agsubedge(Agraph_t * g, Agedge_t * e, int createflag);
 extern Agedge_t *agfstin(Agraph_t * g, Agnode_t * n);
 extern Agedge_t *agnxtin(Agraph_t * g, Agedge_t * e);
@@ -303,7 +304,7 @@ extern char *agnameof(void *);
 extern int agrelabel(void *obj, char *name);	/* scary */
 extern int agrelabel_node(Agnode_t * n, char *newname);
 extern int agdelete(Agraph_t * g, void *obj);
-extern long agdelsubg(Agraph_t * g, Agraph_t * sub);	/* could be agclose */
+extern int64_t agdelsubg(Agraph_t * g, Agraph_t * sub);	/* could be agclose */
 extern int agdelnode(Agraph_t * g, Agnode_t * arg_n);
 extern int agdeledge(Agraph_t * g, Agedge_t * arg_e);
 extern int agobjkind(void *);
@@ -363,7 +364,7 @@ extern int agsafeset(void* obj, char* name, char* value, char* def);
 
 /* defintions for subgraphs */
 extern Agraph_t *agsubg(Agraph_t * g, char *name, int cflag);	/* constructor */
-extern Agraph_t *agidsubg(Agraph_t * g, unsigned long id, int cflag);	/* constructor */
+extern Agraph_t *agidsubg(Agraph_t * g, uint64_t id, int cflag);	/* constructor */
 extern Agraph_t *agfstsubg(Agraph_t * g), *agnxtsubg(Agraph_t * subg);
 extern Agraph_t *agparent(Agraph_t * g);
 

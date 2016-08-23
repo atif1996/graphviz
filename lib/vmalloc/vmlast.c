@@ -282,9 +282,9 @@ int type;
 
 
 #if __STD_C
-static long lastaddr(Vmalloc_t * vm, Void_t * addr)
+static int64_t lastaddr(Vmalloc_t * vm, Void_t * addr)
 #else
-static long lastaddr(vm, addr)
+static int64_t lastaddr(vm, addr)
 Vmalloc_t *vm;
 Void_t *addr;
 #endif
@@ -301,9 +301,9 @@ Void_t *addr;
 }
 
 #if __STD_C
-static long lastsize(Vmalloc_t * vm, Void_t * addr)
+static int64_t lastsize(Vmalloc_t * vm, Void_t * addr)
 #else
-static long lastsize(vm, addr)
+static int64_t lastsize(vm, addr)
 Vmalloc_t *vm;
 Void_t *addr;
 #endif

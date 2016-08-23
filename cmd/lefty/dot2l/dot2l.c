@@ -28,7 +28,7 @@ int inattrstmt;
 static graphframe_t *gstack, *topgframe;
 static Tobj allgraphs, alledges, allnodes;
 static Tobj gdict, edict, ndict, N;
-static long newgid, neweid, newnid, gmark = -1, errflag;
+static int64_t newgid, neweid, newnid, gmark = -1, errflag;
 
 static jmp_buf ljbuf;
 
@@ -42,7 +42,7 @@ static void writeattr (int, Tobj, char *);
 static void quotestring (char *, Tobj);
 
 Tobj D2Lparsegraphlabel (Tobj lo, Tobj ro) {
-    volatile long lm;
+    volatile int64_t lm;
     volatile Tobj to;
 
     lm = Mpushmark (lo);
@@ -78,7 +78,7 @@ static void filllabeltable (Tobj to, int flag) {
     Tobj cto, fo;
     char *tsp, *psp, *hstsp, *hspsp;
     char text[10240], port[256];
-    long cti;
+    int64_t cti;
     int mode, wflag, ishardspace;
 
     mode = 0;
@@ -220,7 +220,7 @@ Tobj D2Lreadgraph (int ioi, Tobj protograph) {
     graphframe_t *gframe, *tgframe;
     edgeframe_t *eframe, *teframe;
     Tobj graph;
-    long m;
+    int64_t m;
 
     protogo = protograph;
     nameo = Tstring ("name");
@@ -592,7 +592,7 @@ void D2Labort (void) {
 void D2Lpushgraph (char *name) {
     graphframe_t *gframe;
     Tobj g, idobj, nameobj;
-    long gid;
+    int64_t gid;
 
     if (!(gframe = Mallocate (sizeof (graphframe_t))))
         panic1 (POS, "D2Lpushgraph", "cannot allocate graph stack");
@@ -650,7 +650,7 @@ Tobj D2Lpopgraph (void) {
 Tobj D2Linsertnode (char *name) {
     graphframe_t *gframe;
     Tobj n, idobj, nameobj;
-    long nid, m;
+    int64_t nid, m;
 
     if ((idobj = Tfinds (ndict, name))) {
         nid = Tgetnumber (idobj), n = Tfindi (allnodes, nid);
@@ -675,7 +675,7 @@ Tobj D2Linsertnode (char *name) {
 void D2Linsertedge (Tobj tail, char *tport, Tobj head, char *hport) {
     graphframe_t *gframe;
     Tobj e;
-    long eid;
+    int64_t eid;
 
     Tinsi (
         alledges, (eid = neweid++),

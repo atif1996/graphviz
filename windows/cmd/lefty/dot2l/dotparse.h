@@ -54,7 +54,7 @@
 #if ! defined (YYSTYPE) && ! defined (YYSTYPE_IS_DECLARED)
 #line 37 "../../../cmd/lefty/dot2l/dotparse.y"
 typedef union YYSTYPE {
-    long i;
+    int64_t i;
     char *s;
     void *o;
 } YYSTYPE;

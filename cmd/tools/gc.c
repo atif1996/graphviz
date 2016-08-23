@@ -266,7 +266,7 @@ static int cc_decompose(Agraph_t * g)
     return c_cnt;
 }
 
-static void ipr(long num)
+static void ipr(int64_t num)
 {
     printf(" %7ld", num);
 }

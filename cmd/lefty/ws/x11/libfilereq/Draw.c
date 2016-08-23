@@ -352,7 +352,7 @@ static void SFinvertEntry (int n) {
     );
 }
 
-static unsigned long SFscrollTimerInterval (void) {
+static uint64_t SFscrollTimerInterval (void) {
     static int maxVal = 200;
     static int varyDist = 50;
     static int minDist = 50;

@@ -1079,15 +1079,15 @@ static const char *re_error_msgid[] =
 #if defined (MATCH_MAY_ALLOCATE)
 /* 4400 was enough to cause a crash on Alpha OSF/1,
    whose default stack limit is 2mb.  */
-static long int re_max_failures = 4000;
+static int64_t re_max_failures = 4000;
 #else
-static long int re_max_failures = 2000;
+static int64_t re_max_failures = 2000;
 #endif
 
 union fail_stack_elt
 {
     unsigned char *pointer;
-    long int integer;
+    int64_t integer;
 };
 
 typedef union fail_stack_elt fail_stack_elt_t;
@@ -1095,8 +1095,8 @@ typedef union fail_stack_elt fail_stack_elt_t;
 typedef struct
 {
     fail_stack_elt_t *stack;
-    unsigned long int size;
-    unsigned long int avail;            /* Offset of next open position.  */
+    uint64_t size;
+    uint64_t avail;            /* Offset of next open position.  */
 } fail_stack_type;
 
 #else /* not INT_IS_16BIT */
@@ -1654,7 +1654,7 @@ typedef unsigned regnum_t;
 /* Since offsets can go either forwards or backwards, this type needs to
    be able to hold values from -(MAX_BUF_SIZE - 1) to MAX_BUF_SIZE - 1.  */
 /* int may be not enough when sizeof(int) == 2.  */
-typedef long pattern_offset_t;
+typedef int64_t pattern_offset_t;
 
 typedef struct
 {
@@ -5194,7 +5194,7 @@ group_match_null_string_p(unsigned char **p,
 
                             while ((re_opcode_t) p1[mcnt-3] == jump_past_alt)
                                 {
-                                    /* `mcnt' holds how many bytes long the alternative
+                                    /* `mcnt' holds how many bytes int64_t the alternative
                                        is, including the ending `jump_past_alt' and
                                        its number.  */
 

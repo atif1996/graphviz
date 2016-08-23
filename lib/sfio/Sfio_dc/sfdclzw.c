@@ -74,7 +74,7 @@
  */
 
 #if LZWBITS > 15
-typedef long int code_int;
+typedef int64_t code_int;
 #else
 typedef int code_int;
 #endif

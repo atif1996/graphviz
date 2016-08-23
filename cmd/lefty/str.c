@@ -445,7 +445,7 @@ static void appends (char *s) {
     sbufi += (n - 1);
 }
 
-static void appendi (long i) {
+static void appendi (int64_t i) {
     char buf[40];
     int n;
 

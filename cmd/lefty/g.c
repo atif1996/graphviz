@@ -35,7 +35,7 @@ int Gerrno;
 char *texts;
 int textn;
 
-static long wsizes[G_WTYPESIZE];
+static int64_t wsizes[G_WTYPESIZE];
 static Gtextline_t tlarray[1000];
 
 Gwattrmap_t Gwattrmap[] = {
@@ -791,7 +791,7 @@ found:
     return new;
 }
 
-Gwidget_t *findwidget (unsigned long w, int type) {
+Gwidget_t *findwidget (uint64_t w, int type) {
     int wi;
 
     if (type == G_WTYPESIZE) {

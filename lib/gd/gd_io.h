@@ -22,7 +22,7 @@ typedef struct gdIOCtx
   /* seek must return 1 on SUCCESS, 0 on FAILURE. Unlike fseek! */
   int (*seek) (struct gdIOCtx *, const int);
 
-  long (*tell) (struct gdIOCtx *);
+  int64_t (*tell) (struct gdIOCtx *);
 
   void (*gd_free) (struct gdIOCtx *);
 
@@ -46,7 +46,7 @@ void Putchar (int c, gdIOCtx * ctx);
  int gdGetInt (int *result, gdIOCtx * ctx);
 
  int gdSeek (gdIOCtx * ctx, const int offset);
- long gdTell (gdIOCtx * ctx);
+ int64_t gdTell (gdIOCtx * ctx);
 
 #endif
 

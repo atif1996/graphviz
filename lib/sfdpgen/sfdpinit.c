@@ -295,7 +295,7 @@ late_quadtree_scheme (graph_t* g, Agsym_t* sym, int dflt)
 static void
 tuneControl (graph_t* g, spring_electrical_control ctrl)
 {
-    long seed;
+    int64_t seed;
     int init;
 
     seed = ctrl->random_seed;
